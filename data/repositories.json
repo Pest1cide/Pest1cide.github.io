@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Example Research Repository",
+    "url": "https://github.com/Pest1cide/example-research-repo",
+    "status": "Public placeholder",
+    "audience": "Researchers and collaborators",
+    "summary": "Use this entry for a repository that supports a paper, reproducible experiment, dataset interface, or public demo.",
+    "topics": ["robotics", "control", "learning"]
+  }
+]

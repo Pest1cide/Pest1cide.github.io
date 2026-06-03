@@ -1,0 +1,11 @@
+[
+  {
+    "slug": "welcome",
+    "title": "Welcome Note",
+    "date": "2026-06-03",
+    "audience": "General",
+    "excerpt": "A placeholder note showing how blog posts work on this static GitHub Pages template.",
+    "file": "posts/2026-06-03-welcome.md",
+    "tags": ["template", "notes"]
+  }
+]
