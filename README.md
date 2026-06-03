@@ -32,6 +32,8 @@ git push -u origin main
 
 After the push, GitHub Pages should serve the site at `https://Pest1cide.github.io/`. If it does not appear automatically, open the repository settings on GitHub and set Pages to deploy from the `main` branch root.
 
+See `PUBLISHING.md` for the GitHub CLI path installed on this laptop and the exact publish commands.
+
 ## Edit Profile Content
 
 - Update the name, title, email, and links in the HTML files.
