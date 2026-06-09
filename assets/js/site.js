@@ -91,7 +91,7 @@
       const markdown = await response.text();
       document.title = post.title + " | Zimeng Wang";
       container.innerHTML = [
-        '<p class="section__label">Blog</p>',
+        '<p class="section__label">Field note</p>',
         "<h1>" + escapeHtml(post.title) + "</h1>",
         '<p class="post-detail__meta">' + formatDate(post.date) + " · " + escapeHtml(post.audience || "General") + "</p>",
         '<div class="markdown">' + renderMarkdown(stripFrontMatter(markdown)) + "</div>"
@@ -130,7 +130,7 @@
       '<p class="post-card__date">' + formatDate(post.date) + " · " + escapeHtml(post.audience || "General") + "</p>",
       "<h2>" + escapeHtml(post.title) + "</h2>",
       "<p>" + escapeHtml(post.excerpt || "") + "</p>",
-      '<a class="text-link" href="post.html?post=' + encodeURIComponent(post.slug) + '">Open post</a>',
+      '<a class="text-link" href="post.html?post=' + encodeURIComponent(post.slug) + '">Open note</a>',
       tagList(post.tags, "post-card__tags"),
       "</article>"
     ].join("");

@@ -1,10 +1,18 @@
 [
   {
-    "name": "Example Research Repository",
-    "url": "https://github.com/Pest1cide/example-research-repo",
-    "status": "Public placeholder",
-    "audience": "Researchers and collaborators",
-    "summary": "Use this entry for a repository that supports a paper, reproducible experiment, dataset interface, or public demo.",
-    "topics": ["robotics", "control", "learning"]
+    "name": "rl_rvo",
+    "url": "https://github.com/Pest1cide/rl_rvo",
+    "status": "Public research fork",
+    "audience": "Multi-agent planning researchers",
+    "summary": "A public fork of reinforcement-learned distributed multi-robot navigation with reciprocal velocity-obstacle-shaped rewards, related to my work on scalable multi-agent planning.",
+    "topics": ["multi-agent systems", "navigation", "reinforcement learning", "Python"]
+  },
+  {
+    "name": "Pest1cide.github.io",
+    "url": "https://github.com/Pest1cide/Pest1cide.github.io",
+    "status": "Personal site",
+    "audience": "Collaborators and visitors",
+    "summary": "The source for this hand-built static portfolio and field-notes site.",
+    "topics": ["GitHub Pages", "HTML", "CSS", "JavaScript"]
   }
 ]

@@ -3,103 +3,204 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Academic portfolio, public projects, interests, and notes by Zimeng Wang.">
-    <title>Zimeng Wang | Academic Portfolio</title>
-    <link rel="preload" href="assets/img/hero-research-workbench.png" as="image">
+    <meta name="description" content="Zimeng Wang is a robotics researcher and engineer working on robot learning, dynamical systems, motion planning, and embodied intelligence.">
+    <title>Zimeng Wang | Robotics Researcher & Engineer</title>
+    <link rel="preload" href="assets/img/zimeng-wang.jpg" as="image">
     <link rel="stylesheet" href="assets/css/styles.css">
     <script defer src="assets/js/site.js"></script>
   </head>
   <body data-page="home">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="index.html" aria-label="Home">
+      <a class="brand" href="index.html" aria-label="Zimeng Wang home">
         <span class="brand__mark">ZW</span>
         <span class="brand__text">Zimeng Wang</span>
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="index.html" data-nav="home">Home</a>
-        <a href="research.html" data-nav="research">Academic</a>
+        <a href="research.html" data-nav="research">Research</a>
         <a href="projects.html" data-nav="projects">Projects</a>
-        <a href="interests.html" data-nav="interests">Interests</a>
-        <a href="blog.html" data-nav="blog">Blog</a>
+        <a href="interests.html" data-nav="interests">Life</a>
+        <a href="blog.html" data-nav="blog">Notes</a>
       </nav>
     </header>
 
     <main id="main">
       <section class="hero" aria-label="Introduction">
-        <img src="assets/img/hero-research-workbench.png" alt="A quiet research desk with robotics equipment and papers." class="hero__image">
-        <div class="hero__shade" aria-hidden="true"></div>
-        <div class="hero__content">
-          <p class="eyebrow">Robotics, control, learning, and practical systems</p>
-          <h1>Zimeng Wang</h1>
-          <p class="hero__summary">
-            A public home for academic work, selected repositories, engineering notes, and personal interests.
-          </p>
-          <div class="hero__actions">
-            <a class="button" href="research.html">Academic Work</a>
-            <a class="button button--secondary" href="blog.html">Read Notes</a>
+        <div class="hero__inner">
+          <div>
+            <p class="availability">M.Sc. student at Aalto University</p>
+            <p class="eyebrow">Robotics · Control · Learning</p>
+            <h1>I build robots that <span>move with purpose.</span></h1>
+            <p class="hero__summary">
+              I am Zimeng Wang, a robotics researcher and engineer focused on obstacle-aware manipulation,
+              motion planning, and learning-based control. My work connects mathematical structure with
+              systems that can be tested in simulation and on hardware.
+            </p>
+            <div class="hero__actions">
+              <a class="button" href="research.html">Explore my research</a>
+              <a class="button button--secondary" href="mailto:zimeng.wang@aalto.fi">Get in touch</a>
+            </div>
+          </div>
+          <div class="hero__portrait">
+            <img src="assets/img/zimeng-wang.jpg" alt="Zimeng Wang by an alpine lake.">
+            <p class="hero__note">From Shenzhen to Helsinki to Lausanne, following hard robotics problems.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--no-top">
+        <div class="stat-grid" aria-label="Profile highlights">
+          <div class="stat">
+            <p class="stat__label">Current</p>
+            <strong>Aalto</strong>
+            <p>M.Sc. in Control, Robotics and Autonomous Systems</p>
+          </div>
+          <div class="stat">
+            <p class="stat__label">Research</p>
+            <strong>LASA</strong>
+            <p>Visiting project on coupled dynamical systems at EPFL</p>
+          </div>
+          <div class="stat">
+            <p class="stat__label">Foundation</p>
+            <strong>SUSTech</strong>
+            <p>B.Eng. in Robotics Engineering, top 10%</p>
+          </div>
+          <div class="stat">
+            <p class="stat__label">Build stack</p>
+            <strong>ROS + ML</strong>
+            <p>Python, C++, PyTorch, simulation, and control</p>
           </div>
         </div>
       </section>
 
       <section class="section section--compact">
-        <div class="intro-grid">
+        <div class="profile-grid">
           <div>
-            <p class="section__label">Profile</p>
-            <h2>Academic first, but not only academic.</h2>
+            <p class="section__label">What drives me</p>
+            <h2>Make the theory earn its place.</h2>
           </div>
-          <p class="lead">
-            This site is organized by audience. Researchers can scan publications and public repositories, engineers can inspect selected demos, and broader visitors can read short notes or interests without needing private source access.
-          </p>
+          <div class="profile-copy">
+            <p>
+              I enjoy problems where elegant mathematics must survive contact with a real robot:
+              collision geometry, imperfect sensing, hardware limits, and the long tail of integration work.
+            </p>
+            <p>
+              My current work explores configuration-space distance representations and dynamical systems
+              for safe manipulation. Earlier projects took me through decentralized multi-agent planning,
+              Spot digital twins, reinforcement learning, and wheel-legged robot control.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--dark">
+        <div class="section__header section__header--split">
+          <div>
+            <p class="section__label">Selected work</p>
+            <h2>Research that becomes a system.</h2>
+          </div>
+          <a class="button button--ghost" href="projects.html">View all projects</a>
+        </div>
+        <div class="card-grid">
+          <article class="card card--dark">
+            <img class="card__image" src="assets/img/franka-obstacle-avoidance.jpg" alt="Franka robot moving through a dense obstacle field.">
+            <div class="card__body">
+              <p class="card__meta">EPFL LASA · Current research</p>
+              <h3>Obstacle-aware manipulation</h3>
+              <p>Configuration-space distance fields and coupled dynamical systems for safe, efficient robot motion.</p>
+              <a class="text-link" href="research.html">Research details</a>
+            </div>
+          </article>
+          <article class="card card--dark">
+            <img class="card__image" src="assets/img/spot-digital-twin.jpg" alt="OptiTrack motion capture interface used in the Spot digital twin project.">
+            <div class="card__body">
+              <p class="card__meta">Aalto · Project manager</p>
+              <h3>Spot digital twin</h3>
+              <p>A real-to-simulation pipeline driven by live Spot state and human motion captured with OptiTrack.</p>
+              <a class="text-link" href="projects.html#spot">Project details</a>
+            </div>
+          </article>
+          <article class="card card--dark">
+            <img class="card__image" src="assets/img/legged-robot.jpg" alt="A simulated legged robot walking in PyBullet.">
+            <div class="card__body">
+              <p class="card__meta">Control & locomotion</p>
+              <h3>From wheels to legs</h3>
+              <p>Control experiments across a RoboMaster wheel-legged platform, quadruped simulation, and legged robotics coursework.</p>
+              <a class="text-link" href="projects.html#locomotion">Project details</a>
+            </div>
+          </article>
         </div>
       </section>
 
       <section class="section">
         <div class="section__header">
-          <p class="section__label">Audience Map</p>
-          <h2>Different sections, different jobs.</h2>
+          <p class="section__label">A path through robotics</p>
+          <h2>Three places, one growing question.</h2>
+          <p class="section__intro">How can robots act safely and intelligently when the environment refuses to be simple?</p>
         </div>
-        <div class="audience-grid">
-          <article class="card">
-            <p class="card__meta">Academic readers</p>
-            <h3>Research and repositories</h3>
-            <p>Concise research themes, publication placeholders, and public code examples that are safe to show.</p>
-            <a class="text-link" href="research.html">Open academic section</a>
+        <div class="path-grid">
+          <article class="path-card path-card--accent">
+            <p class="card__meta">2020–2024 · Shenzhen</p>
+            <h3>SUSTech</h3>
+            <p>Built a foundation in robotics engineering through control, mechanical design, ROS, and a wheel-legged robot thesis.</p>
           </article>
-          <article class="card">
-            <p class="card__meta">Builders</p>
-            <h3>Projects and demos</h3>
-            <p>Engineering artifacts, prototypes, and implementation notes for people who want to understand how work becomes usable.</p>
-            <a class="text-link" href="projects.html">Browse projects</a>
+          <article class="path-card">
+            <p class="card__meta">2024–Present · Helsinki</p>
+            <h3>Aalto University</h3>
+            <p>Studying control, robotics, and autonomous systems while researching multi-agent planning and leading a Spot digital twin project.</p>
           </article>
-          <article class="card">
-            <p class="card__meta">General visitors</p>
-            <h3>Interests and writing</h3>
-            <p>Personal topics, reading notes, and shorter blog posts that keep the site active between formal research updates.</p>
-            <a class="text-link" href="interests.html">See interests</a>
+          <article class="path-card path-card--image">
+            <img src="assets/img/epfl-campus.jpg" alt="EPFL campus with Lake Geneva and mountains in the distance.">
+            <div>
+              <p class="card__meta">2025–2026 · Lausanne</p>
+              <h3>EPFL LASA</h3>
+              <p>Researching obstacle avoidance with coupled dynamical systems and learned distance representations.</p>
+            </div>
+          </article>
+          <article class="path-card">
+            <p class="card__meta">Next</p>
+            <h3>Reliable embodied intelligence</h3>
+            <p>I am interested in research and engineering collaborations at the intersection of learning, control, and physical systems.</p>
+            <a class="text-link" href="mailto:zimeng.wang@aalto.fi">Start a conversation</a>
           </article>
         </div>
       </section>
 
-      <section class="section section--tint">
+      <section class="section section--warm">
         <div class="section__header section__header--split">
           <div>
-            <p class="section__label">Latest</p>
-            <h2>Recent notes</h2>
+            <p class="section__label">Field notes</p>
+            <h2>Ideas behind the work.</h2>
           </div>
-          <a class="button button--ghost" href="blog.html">All Posts</a>
+          <a class="button button--ghost" href="blog.html">Read all notes</a>
         </div>
         <div class="post-grid" data-latest-posts data-limit="3">
-          <p class="muted">Loading posts...</p>
+          <p class="muted">Loading notes...</p>
+        </div>
+      </section>
+
+      <section class="contact-band">
+        <div class="contact-band__inner">
+          <div>
+            <p class="section__label">Contact</p>
+            <h2>Interested in robots that learn, plan, and move?</h2>
+            <p class="lead">I am always glad to discuss research, practical robotics systems, and thoughtful collaborations.</p>
+          </div>
+          <div class="contact-band__actions">
+            <a class="button" href="mailto:zimeng.wang@aalto.fi">zimeng.wang@aalto.fi</a>
+            <a class="button button--secondary" href="https://github.com/Pest1cide" rel="noopener noreferrer">GitHub · Pest1cide</a>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>&copy; <span data-current-year></span> Zimeng Wang.</p>
+      <p>&copy; <span data-current-year></span> Zimeng Wang. Built as a living record of my work.</p>
       <div class="footer-links">
         <a href="mailto:zimeng.wang@aalto.fi">Email</a>
-        <a href="https://github.com/Pest1cide">GitHub</a>
+        <a href="https://github.com/Pest1cide" rel="noopener noreferrer">GitHub</a>
+        <a href="https://fi.linkedin.com/in/zimeng-wang-444815332" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </footer>
   </body>

@@ -1,11 +1,29 @@
 [
   {
-    "slug": "welcome",
-    "title": "Welcome Note",
+    "slug": "distance-gradients-for-robot-motion",
+    "title": "Why Distance Gradients Matter for Robot Motion",
+    "date": "2026-06-09",
+    "audience": "Research",
+    "excerpt": "A distance value tells a robot how close it is. A useful gradient begins to tell it what to do next.",
+    "file": "posts/2026-06-09-distance-gradients-for-robot-motion.md",
+    "tags": ["distance fields", "motion planning", "dynamical systems"]
+  },
+  {
+    "slug": "spot-digital-twin-lessons",
+    "title": "What a Spot Digital Twin Taught Me About Integration",
+    "date": "2026-06-06",
+    "audience": "Engineering",
+    "excerpt": "The hard part of a digital twin is not drawing another robot. It is making time, frames, interfaces, and people agree.",
+    "file": "posts/2026-06-06-spot-digital-twin-lessons.md",
+    "tags": ["digital twin", "Spot", "systems"]
+  },
+  {
+    "slug": "three-robotics-environments",
+    "title": "One Robotics Path Across Three Universities",
     "date": "2026-06-03",
-    "audience": "General",
-    "excerpt": "A placeholder note showing how blog posts work on this static GitHub Pages template.",
-    "file": "posts/2026-06-03-welcome.md",
-    "tags": ["template", "notes"]
+    "audience": "Personal",
+    "excerpt": "SUSTech, Aalto, and EPFL each changed how I think about building and researching robots.",
+    "file": "posts/2026-06-03-three-robotics-environments.md",
+    "tags": ["research life", "robotics", "learning"]
   }
 ]
