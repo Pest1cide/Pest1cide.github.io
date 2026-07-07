@@ -3,204 +3,400 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Zimeng Wang is a robotics researcher and engineer working on robot learning, dynamical systems, motion planning, and embodied intelligence.">
-    <title>Zimeng Wang | Robotics Researcher & Engineer</title>
-    <link rel="preload" href="assets/img/zimeng-wang.jpg" as="image">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <script defer src="assets/js/site.js"></script>
+    <meta name="description" content="Zimeng Wang — robotics researcher working on configuration-space distance functions, dynamical systems, and motion planning. M.Sc. at Aalto University, thesis at Idiap & EPFL.">
+    <meta property="og:title" content="Zimeng Wang — Robotics · Control · Learning">
+    <meta property="og:description" content="Robots that move with purpose. Research on distance functions, reactive motion, and robot learning.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/img/zimeng-wang.jpg">
+    <meta name="theme-color" content="#0b0b0d">
+    <title>Zimeng Wang | Robotics Researcher &amp; Engineer</title>
+    <link rel="preload" href="assets/fonts/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="assets/css/studio.css">
+    <script defer src="assets/js/studio.js"></script>
   </head>
-  <body data-page="home">
+  <body data-page="home" class="is-loading">
     <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="loader" aria-hidden="true">
+      <div class="loader__row">
+        <span class="loader__name">Zimeng Wang</span>
+        <span class="loader__tag">Robotics · Control · Learning</span>
+      </div>
+      <div class="loader__row">
+        <span class="loader__tag">Shenzhen — Helsinki — Lausanne</span>
+        <span class="loader__count">000</span>
+      </div>
+      <div class="loader__bar"></div>
+    </div>
+
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Zimeng Wang home">
         <span class="brand__mark">ZW</span>
         <span class="brand__text">Zimeng Wang</span>
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="index.html" data-nav="home">Home</a>
-        <a href="research.html" data-nav="research">Research</a>
-        <a href="projects.html" data-nav="projects">Projects</a>
-        <a href="interests.html" data-nav="interests">Life</a>
-        <a href="blog.html" data-nav="blog">Notes</a>
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#projects">Projects</a>
+        <a href="#beyond">Beyond</a>
+        <a href="#notes">Notes</a>
+        <a href="#contact">Contact</a>
       </nav>
+      <a class="btn btn--ghost btn--sm header-cta" href="files/CV_Zimeng_Wang.pdf" download>CV ↓</a>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span>
+      </button>
     </header>
 
+    <div class="nav-overlay">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#beyond">Beyond</a>
+      <a href="#notes">Notes</a>
+      <a href="#contact">Contact</a>
+      <a href="files/CV_Zimeng_Wang.pdf" download>Download CV</a>
+    </div>
+
     <main id="main">
+      <!-- Hero -->
       <section class="hero" aria-label="Introduction">
-        <div class="hero__inner">
-          <div>
-            <p class="availability">M.Sc. student at Aalto University</p>
-            <p class="eyebrow">Robotics · Control · Learning</p>
-            <h1>I build robots that <span>move with purpose.</span></h1>
+        <div class="hero__canvas" aria-hidden="true"></div>
+        <div class="shell">
+          <p class="hero__status">Master&rsquo;s thesis — Robot Learning &amp; Interaction, Idiap / EPFL</p>
+          <h1>Robots that <em>move</em><br>with purpose.</h1>
+          <div class="hero__foot">
             <p class="hero__summary">
-              I am Zimeng Wang, a robotics researcher and engineer focused on obstacle-aware manipulation,
-              motion planning, and learning-based control. My work connects mathematical structure with
-              systems that can be tested in simulation and on hardware.
+              I am Zimeng Wang, a robotics researcher working where learning meets control:
+              configuration-space distance functions, reactive dynamical systems, and motion
+              planning that survives contact with real hardware.
             </p>
             <div class="hero__actions">
-              <a class="button" href="research.html">Explore my research</a>
-              <a class="button button--secondary" href="mailto:zimeng.wang@aalto.fi">Get in touch</a>
+              <a class="btn btn--solid" href="#research">Explore research</a>
+              <a class="btn btn--ghost" href="files/CV_Zimeng_Wang.pdf" download>Download CV</a>
             </div>
           </div>
-          <div class="hero__portrait">
-            <img src="assets/img/zimeng-wang.jpg" alt="Zimeng Wang by an alpine lake.">
-            <p class="hero__note">From Shenzhen to Helsinki to Lausanne, following hard robotics problems.</p>
+        </div>
+        <span class="hero__scroll" aria-hidden="true">Scroll</span>
+      </section>
+
+      <!-- Marquee -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>Distance Fields</span><span>Dynamical Systems</span><span>MPPI</span><span>ROS</span>
+          <span>PyTorch</span><span>cuRobo</span><span>IsaacLab</span><span>C++</span><span>Python</span>
+          <span>LQR</span><span>Motion Planning</span><span>Robot Learning</span>
+          <span>Distance Fields</span><span>Dynamical Systems</span><span>MPPI</span><span>ROS</span>
+          <span>PyTorch</span><span>cuRobo</span><span>IsaacLab</span><span>C++</span><span>Python</span>
+          <span>LQR</span><span>Motion Planning</span><span>Robot Learning</span>
+        </div>
+      </div>
+
+      <!-- About -->
+      <section class="section" id="about">
+        <div class="shell">
+          <div class="about-grid">
+            <div class="about-copy" data-reveal>
+              <p class="eyebrow"><span class="eyebrow__idx">01</span> About</p>
+              <p class="lead">
+                Make the theory earn its place. I enjoy problems where elegant mathematics must
+                survive collision geometry, imperfect sensing, and the long tail of integration work.
+              </p>
+              <p>
+                My path runs from Shenzhen to Helsinki to Lausanne: a robotics engineering degree at
+                SUSTech, a master&rsquo;s in control and autonomous systems at Aalto, and research visits
+                at EPFL — first at LASA on reactive motion, now at the Robot Learning &amp; Interaction
+                group at Idiap for my thesis on self-supervised configuration-space distance functions.
+              </p>
+              <p>
+                Along the way: multi-agent planning, a Spot digital twin, wheel-legged robot control,
+                and a Top-5 finish among worldwide teams at the LeRobot hackathon.
+              </p>
+            </div>
+            <div class="edu-list">
+              <article class="edu-card" data-reveal style="--reveal-order: 1;">
+                <span class="edu-card__years">2024 —</span>
+                <div>
+                  <h3>Aalto University</h3>
+                  <p>M.Sc. Control, Robotics &amp; Autonomous Systems · Full tuition scholarship</p>
+                </div>
+                <span class="edu-card__gpa">GPA 4.83 / 5</span>
+              </article>
+              <article class="edu-card" data-reveal style="--reveal-order: 2;">
+                <span class="edu-card__years">2025 — 26</span>
+                <div>
+                  <h3>EPFL</h3>
+                  <p>Exchange &amp; thesis research · LASA, then Idiap RLI · Mobility scholarship</p>
+                </div>
+                <span class="edu-card__gpa">GPA 5.22 / 6</span>
+              </article>
+              <article class="edu-card" data-reveal style="--reveal-order: 3;">
+                <span class="edu-card__years">2020 — 24</span>
+                <div>
+                  <h3>SUSTech</h3>
+                  <p>B.Eng. Robotics Engineering · Wheel-legged robot thesis</p>
+                </div>
+                <span class="edu-card__gpa">Top 10%</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="stat-row" style="margin-top: clamp(3rem, 8vh, 5rem);" data-reveal>
+            <div class="stat">
+              <strong>4.83<sup>/5</sup></strong>
+              <p>GPA in the Aalto robotics master&rsquo;s programme</p>
+            </div>
+            <div class="stat">
+              <strong>Top 5</strong>
+              <p>Worldwide, LeRobot hackathon — 2nd award</p>
+            </div>
+            <div class="stat">
+              <strong>7-DoF</strong>
+              <p>Franka manipulator experiments in simulation &amp; hardware</p>
+            </div>
+            <div class="stat">
+              <strong>3</strong>
+              <p>Labs across Finland, Switzerland, and China</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section section--no-top">
-        <div class="stat-grid" aria-label="Profile highlights">
-          <div class="stat">
-            <p class="stat__label">Current</p>
-            <strong>Aalto</strong>
-            <p>M.Sc. in Control, Robotics and Autonomous Systems</p>
-          </div>
-          <div class="stat">
-            <p class="stat__label">Research</p>
-            <strong>LASA</strong>
-            <p>Visiting project on coupled dynamical systems at EPFL</p>
-          </div>
-          <div class="stat">
-            <p class="stat__label">Foundation</p>
-            <strong>SUSTech</strong>
-            <p>B.Eng. in Robotics Engineering, top 10%</p>
-          </div>
-          <div class="stat">
-            <p class="stat__label">Build stack</p>
-            <strong>ROS + ML</strong>
-            <p>Python, C++, PyTorch, simulation, and control</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section--compact">
-        <div class="profile-grid">
-          <div>
-            <p class="section__label">What drives me</p>
-            <h2>Make the theory earn its place.</h2>
-          </div>
-          <div class="profile-copy">
-            <p>
-              I enjoy problems where elegant mathematics must survive contact with a real robot:
-              collision geometry, imperfect sensing, hardware limits, and the long tail of integration work.
-            </p>
-            <p>
-              My current work explores configuration-space distance representations and dynamical systems
-              for safe manipulation. Earlier projects took me through decentralized multi-agent planning,
-              Spot digital twins, reinforcement learning, and wheel-legged robot control.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section--dark">
-        <div class="section__header section__header--split">
-          <div>
-            <p class="section__label">Selected work</p>
-            <h2>Research that becomes a system.</h2>
-          </div>
-          <a class="button button--ghost" href="projects.html">View all projects</a>
-        </div>
-        <div class="card-grid">
-          <article class="card card--dark">
-            <img class="card__image" src="assets/img/franka-obstacle-avoidance.jpg" alt="Franka robot moving through a dense obstacle field.">
-            <div class="card__body">
-              <p class="card__meta">EPFL LASA · Current research</p>
-              <h3>Obstacle-aware manipulation</h3>
-              <p>Configuration-space distance fields and coupled dynamical systems for safe, efficient robot motion.</p>
-              <a class="text-link" href="research.html">Research details</a>
-            </div>
-          </article>
-          <article class="card card--dark">
-            <img class="card__image" src="assets/img/spot-digital-twin.jpg" alt="OptiTrack motion capture interface used in the Spot digital twin project.">
-            <div class="card__body">
-              <p class="card__meta">Aalto · Project manager</p>
-              <h3>Spot digital twin</h3>
-              <p>A real-to-simulation pipeline driven by live Spot state and human motion captured with OptiTrack.</p>
-              <a class="text-link" href="projects.html#spot">Project details</a>
-            </div>
-          </article>
-          <article class="card card--dark">
-            <img class="card__image" src="assets/img/legged-robot.jpg" alt="A simulated legged robot walking in PyBullet.">
-            <div class="card__body">
-              <p class="card__meta">Control & locomotion</p>
-              <h3>From wheels to legs</h3>
-              <p>Control experiments across a RoboMaster wheel-legged platform, quadruped simulation, and legged robotics coursework.</p>
-              <a class="text-link" href="projects.html#locomotion">Project details</a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section__header">
-          <p class="section__label">A path through robotics</p>
-          <h2>Three places, one growing question.</h2>
-          <p class="section__intro">How can robots act safely and intelligently when the environment refuses to be simple?</p>
-        </div>
-        <div class="path-grid">
-          <article class="path-card path-card--accent">
-            <p class="card__meta">2020–2024 · Shenzhen</p>
-            <h3>SUSTech</h3>
-            <p>Built a foundation in robotics engineering through control, mechanical design, ROS, and a wheel-legged robot thesis.</p>
-          </article>
-          <article class="path-card">
-            <p class="card__meta">2024–Present · Helsinki</p>
-            <h3>Aalto University</h3>
-            <p>Studying control, robotics, and autonomous systems while researching multi-agent planning and leading a Spot digital twin project.</p>
-          </article>
-          <article class="path-card path-card--image">
-            <img src="assets/img/epfl-campus.jpg" alt="EPFL campus with Lake Geneva and mountains in the distance.">
+      <!-- Research -->
+      <section class="section section--hairline" id="research">
+        <div class="shell">
+          <div class="section-head" data-reveal>
             <div>
-              <p class="card__meta">2025–2026 · Lausanne</p>
-              <h3>EPFL LASA</h3>
-              <p>Researching obstacle avoidance with coupled dynamical systems and learned distance representations.</p>
+              <p class="eyebrow"><span class="eyebrow__idx">02</span> Research</p>
+              <h2>Distance is a language robots understand.</h2>
+            </div>
+            <a class="btn btn--ghost btn--sm" href="research.html">Full research page</a>
+          </div>
+
+          <article class="research-entry" data-reveal>
+            <div class="research-entry__body">
+              <div class="research-entry__meta">
+                <span class="chip chip--accent">Master&rsquo;s thesis · 2026</span>
+                <span class="chip">Idiap / EPFL · Robot Learning &amp; Interaction</span>
+              </div>
+              <h3>Self-supervised configuration-space distance functions</h3>
+              <p>
+                SCDF is a self-supervised, physics-informed neural distance function that removes the
+                expensive configuration-space ground-truth labelling required by CDF, while preserving
+                its one-step inverse-kinematics property.
+              </p>
+              <p>
+                Integrated into learning-based and gradient-based pipelines for controlled comparisons
+                against JSDF, CDF, RDF, and PointNet baselines — from 2-D reinforcement-learning tasks
+                to 7-DoF manipulators.
+              </p>
+              <div class="research-entry__links">
+                <a class="text-link" href="research.html">Read more</a>
+              </div>
+              <p class="research-entry__supervisors">
+                With <a href="https://calinon.ch/" rel="noopener noreferrer">Sylvain Calinon</a>,
+                <a href="https://baumanndominik.github.io/" rel="noopener noreferrer">Dominik Baumann</a>
+                and <a href="https://yimingli1998.github.io/" rel="noopener noreferrer">Yiming Li</a>
+              </p>
+            </div>
+            <figure class="media-frame media-frame--stack research-entry__media">
+              <video data-autoplay muted loop playsinline preload="metadata" src="assets/media/scdf_rl_success1.mp4" aria-label="SCDF-guided policy avoiding obstacles in a 2-D task"></video>
+              <video data-autoplay muted loop playsinline preload="metadata" src="assets/media/scdf_rl_success2.mp4" aria-label="Second SCDF evaluation rollout reaching the goal"></video>
+              <figcaption>SCDF-guided RL policy — evaluation rollouts</figcaption>
+            </figure>
+          </article>
+
+          <article class="research-entry research-entry--flip" data-reveal>
+            <div class="research-entry__body">
+              <div class="research-entry__meta">
+                <span class="chip chip--accent">LASA · EPFL · 2025 —</span>
+                <span class="chip">Reactive motion</span>
+              </div>
+              <h3>Optimization-based vs. reactive dynamical systems</h3>
+              <p>
+                A comprehensive benchmark of GPU-accelerated MPPI control (NVIDIA cuRobo) against
+                geometrically-guided hybrid dynamical systems for reactive motion planning.
+              </p>
+              <p>
+                Built a hybrid motion-generation framework for a 7-DoF Franka Emika Panda that couples
+                diffeomorphic transformations with implicit representations (Neural-JSDF / CDF) to
+                guarantee stable obstacle avoidance.
+              </p>
+              <div class="research-entry__links">
+                <a class="text-link" href="research.html">Read more</a>
+              </div>
+              <p class="research-entry__supervisors">
+                With <a href="https://people.epfl.ch/aude.billard" rel="noopener noreferrer">Aude Billard</a>
+                and <a href="https://scholar.google.com/citations?user=IH4FwSAAAAAJ" rel="noopener noreferrer">Rui Wu</a>
+              </p>
+            </div>
+            <figure class="media-frame research-entry__media">
+              <video data-autoplay muted loop playsinline preload="metadata" src="assets/media/lasa_mppi_demo.mp4" aria-label="MPPI rollouts steering a planar manipulator around obstacles"></video>
+              <figcaption>MPPI rollouts — planar manipulator</figcaption>
+            </figure>
+          </article>
+
+          <article class="research-entry research-entry--single" data-reveal>
+            <div class="research-entry__body">
+              <div class="research-entry__meta">
+                <span class="chip chip--accent">Aalto · 2024 — 25</span>
+                <span class="chip">Multi-agent planning</span>
+              </div>
+              <h3>Scalability of multi-agent path finding</h3>
+              <p>
+                Introduced and optimized hybrid velocity-obstacle methods for decentralized collision
+                avoidance. In simulations with 12 agents, the approach improved overall planning
+                efficiency by 10% over global planners.
+              </p>
+              <p class="research-entry__supervisors">
+                With <a href="https://www.aalto.fi/en/people/tomasz-kucner" rel="noopener noreferrer">Tomasz Kucner</a>,
+                Mobile Robotics Group
+              </p>
             </div>
           </article>
-          <article class="path-card">
-            <p class="card__meta">Next</p>
-            <h3>Reliable embodied intelligence</h3>
-            <p>I am interested in research and engineering collaborations at the intersection of learning, control, and physical systems.</p>
-            <a class="text-link" href="mailto:zimeng.wang@aalto.fi">Start a conversation</a>
-          </article>
         </div>
       </section>
 
-      <section class="section section--warm">
-        <div class="section__header section__header--split">
-          <div>
-            <p class="section__label">Field notes</p>
-            <h2>Ideas behind the work.</h2>
+      <!-- Projects -->
+      <section class="section section--hairline" id="projects">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <div>
+              <p class="eyebrow"><span class="eyebrow__idx">03</span> Projects</p>
+              <h2>Systems that had to work.</h2>
+            </div>
+            <a class="btn btn--ghost btn--sm" href="projects.html">All projects</a>
           </div>
-          <a class="button button--ghost" href="blog.html">Read all notes</a>
-        </div>
-        <div class="post-grid" data-latest-posts data-limit="3">
-          <p class="muted">Loading notes...</p>
+
+          <div class="project-grid">
+            <article class="project-card" data-reveal>
+              <div class="project-card__media">
+                <video data-autoplay muted loop playsinline preload="metadata" src="assets/media/gpi_compare.mp4" aria-label="Side-by-side comparison of manipulation policies in simulation"></video>
+              </div>
+              <div class="project-card__body">
+                <p class="project-card__meta"><span>LeRobot Hackathon</span><span>2026</span></p>
+                <h3>Generalist policy improvement</h3>
+                <p>Post-training a generalist manipulation policy — 2nd award, Top 5 among worldwide teams.</p>
+                <a class="text-link" href="https://huggingface.co/spaces/LeRobot-worldwide-hackathon/all-winners" rel="noopener noreferrer">Winners page</a>
+              </div>
+            </article>
+
+            <article class="project-card" data-reveal style="--reveal-order: 1;">
+              <div class="project-card__media">
+                <video data-autoplay muted loop playsinline preload="metadata" src="assets/media/spot_digital_twin.mp4" aria-label="Spot robot digital twin mirroring live motion in simulation"></video>
+              </div>
+              <div class="project-card__body">
+                <p class="project-card__meta"><span>Aalto · Project lead</span><span>2025</span></p>
+                <h3>Spot digital twin</h3>
+                <p>A real-to-simulation pipeline driven by live Spot state and human motion captured with OptiTrack.</p>
+                <a class="text-link" href="projects.html#spot">Project details</a>
+              </div>
+            </article>
+
+            <article class="project-card" data-reveal>
+              <div class="project-card__media">
+                <img src="assets/img/legged-robot.jpg" alt="Simulated legged robot walking" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <p class="project-card__meta"><span>SUSTech ARTINX</span><span>2023 — 24</span></p>
+                <h3>Wheel-legged RoboMaster robot</h3>
+                <p>LQR and virtual model control for smooth ground motion and obstacle traversal — national Top 32, later my bachelor&rsquo;s thesis.</p>
+                <a class="text-link" href="https://www.bilibili.com/video/BV1wD421G7vK/" rel="noopener noreferrer">Watch the robot run</a>
+              </div>
+            </article>
+
+            <article class="project-card" data-reveal style="--reveal-order: 1;">
+              <div class="project-card__body">
+                <p class="project-card__meta"><span>MEICC · National 2nd Prize</span><span>2022</span></p>
+                <h3>Lobster-inspired lychee-picking robot</h3>
+                <p>A manipulator imitating lobster and Bennett joints to cut, clip, and pull in a single tool — inverse kinematics and generative design included.</p>
+                <a class="text-link" href="projects.html">Project details</a>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section class="contact-band">
-        <div class="contact-band__inner">
-          <div>
-            <p class="section__label">Contact</p>
-            <h2>Interested in robots that learn, plan, and move?</h2>
-            <p class="lead">I am always glad to discuss research, practical robotics systems, and thoughtful collaborations.</p>
+      <!-- Beyond the lab -->
+      <section class="section section--hairline" id="beyond">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <div>
+              <p class="eyebrow"><span class="eyebrow__idx">04</span> Beyond the lab</p>
+              <h2>Research is better with a wider view.</h2>
+            </div>
+            <a class="btn btn--ghost btn--sm" href="interests.html">More about life</a>
           </div>
-          <div class="contact-band__actions">
-            <a class="button" href="mailto:zimeng.wang@aalto.fi">zimeng.wang@aalto.fi</a>
-            <a class="button button--secondary" href="https://github.com/Pest1cide" rel="noopener noreferrer">GitHub · Pest1cide</a>
+          <div class="beyond-grid">
+            <a class="beyond-card" href="interests.html" data-reveal>
+              <img src="assets/img/zermatt.jpg" alt="Alpine peaks near Zermatt" loading="lazy">
+              <div class="beyond-card__body">
+                <span class="beyond-card__tag">In the mountains</span>
+                <h3>Climbing</h3>
+                <p>Routes, granite, and patience — stories coming soon.</p>
+              </div>
+            </a>
+            <a class="beyond-card" href="interests.html" data-reveal style="--reveal-order: 1;">
+              <img src="assets/img/lake-geneva.jpg" alt="Road along Lake Geneva" loading="lazy">
+              <div class="beyond-card__body">
+                <span class="beyond-card__tag">On the road</span>
+                <h3>Cycling</h3>
+                <p>Lakeside kilometres between Lausanne and everywhere else.</p>
+              </div>
+            </a>
+            <a class="beyond-card" href="interests.html" data-reveal style="--reveal-order: 2;">
+              <img src="assets/img/epfl-campus.jpg" alt="EPFL campus with Lake Geneva and mountains" loading="lazy">
+              <div class="beyond-card__body">
+                <span class="beyond-card__tag">Behind the lens</span>
+                <h3>Photography</h3>
+                <p>Keeping a record of places that shaped the work.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="section section--hairline" id="notes">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <div>
+              <p class="eyebrow"><span class="eyebrow__idx">05</span> Field notes</p>
+              <h2>Ideas behind the work.</h2>
+            </div>
+            <a class="btn btn--ghost btn--sm" href="blog.html">All notes</a>
+          </div>
+          <div class="notes-list" data-latest-posts data-limit="3" data-reveal>
+            <p class="muted">Loading notes…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="contact section--hairline" id="contact">
+        <div class="shell" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__idx">06</span> Contact</p>
+          <h2>Let&rsquo;s build robots that <em>move with purpose</em>.</h2>
+          <a class="contact__email" href="mailto:zimeng.wang@aalto.fi">zimeng.wang@aalto.fi</a>
+          <div class="contact__links">
+            <a class="btn btn--ghost" href="https://github.com/Pest1cide" rel="noopener noreferrer">GitHub</a>
+            <a class="btn btn--ghost" href="https://fi.linkedin.com/in/zimeng-wang-444815332" rel="noopener noreferrer">LinkedIn</a>
+            <a class="btn btn--ghost" href="files/CV_Zimeng_Wang.pdf" download>CV ↓</a>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>&copy; <span data-current-year></span> Zimeng Wang. Built as a living record of my work.</p>
-      <div class="footer-links">
-        <a href="mailto:zimeng.wang@aalto.fi">Email</a>
-        <a href="https://github.com/Pest1cide" rel="noopener noreferrer">GitHub</a>
-        <a href="https://fi.linkedin.com/in/zimeng-wang-444815332" rel="noopener noreferrer">LinkedIn</a>
+      <div class="shell">
+        <p>&copy; <span data-current-year></span> Zimeng Wang — built by hand, no frameworks.</p>
+        <div class="footer-links">
+          <a href="research.html">Research</a>
+          <a href="projects.html">Projects</a>
+          <a href="interests.html">Life</a>
+          <a href="blog.html">Notes</a>
+        </div>
       </div>
     </footer>
   </body>
