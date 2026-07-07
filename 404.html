@@ -3,13 +3,82 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Page not found on Zimeng Wang's personal website.">
-    <title>Page Not Found | Zimeng Wang</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <script defer src="assets/js/site.js"></script>
+    <meta name="description" content="Page not found — this trajectory left the workspace. Head back to Zimeng Wang's homepage, research, or projects.">
+    <meta name="theme-color" content="#0b0b0d">
+    <title>404 — Page Not Found | Zimeng Wang</title>
+    <link rel="stylesheet" href="assets/css/studio.css">
+    <script defer src="assets/js/studio.js"></script>
+    <style>
+      /* 404-only layout: center the hero between fixed header and footer */
+      body[data-page="404"] {
+        display: flex;
+        flex-direction: column;
+        min-height: 100svh;
+      }
+      body[data-page="404"] main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+      body[data-page="404"] .page-hero {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        padding-top: clamp(7rem, 16vh, 10rem);
+        padding-bottom: clamp(3.5rem, 9vh, 6rem);
+      }
+      /* faint distance-field contour rings, echoing the homepage hero */
+      body[data-page="404"] .page-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: repeating-radial-gradient(
+          circle at 76% 30%,
+          transparent 0 42px,
+          var(--hair-soft) 42px 43px
+        );
+        -webkit-mask-image: radial-gradient(circle at 76% 30%, rgba(0, 0, 0, 0.85), transparent 62%);
+        mask-image: radial-gradient(circle at 76% 30%, rgba(0, 0, 0, 0.85), transparent 62%);
+        pointer-events: none;
+      }
+      body[data-page="404"] .page-hero .shell {
+        position: relative;
+        z-index: 1;
+      }
+      .lost-code {
+        font-family: var(--font-display);
+        font-weight: 500;
+        font-size: clamp(6.5rem, 24vw, 17rem);
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+        color: rgba(242, 240, 234, 0.05);
+        -webkit-text-stroke: 1.5px rgba(242, 240, 234, 0.3);
+        user-select: none;
+        margin-bottom: clamp(1.2rem, 3.5vh, 2.2rem);
+      }
+      .lost-code em {
+        font-style: normal;
+        color: var(--accent-soft);
+        -webkit-text-stroke-color: var(--accent);
+      }
+      @supports not (-webkit-text-stroke: 1px black) {
+        .lost-code { color: var(--ink-faint); }
+        .lost-code em { color: var(--accent); }
+      }
+      body[data-page="404"] .page-hero h1 {
+        font-size: clamp(2.2rem, 5.5vw, 4rem);
+      }
+      .lost-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 2.2rem;
+      }
+    </style>
   </head>
-  <body>
+  <body data-page="404">
     <a class="skip-link" href="#main">Skip to content</a>
+
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Zimeng Wang home">
         <span class="brand__mark">ZW</span>
@@ -22,22 +91,34 @@
         <a href="interests.html">Life</a>
         <a href="blog.html">Notes</a>
       </nav>
+      <a class="btn btn--ghost btn--sm header-cta" href="files/CV_Zimeng_Wang.pdf" download>CV ↓</a>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
     </header>
-    <main id="main" class="page-shell">
-      <section class="page-heading">
-        <p class="section__label">404 · Lost trajectory</p>
-        <h1>This path does not reach a page.</h1>
-        <p class="lead">The link may be outdated, but the rest of the site is still within reach.</p>
-        <a class="button" href="index.html">Return home</a>
+    <div class="nav-overlay">
+      <a href="index.html">Home</a><a href="research.html">Research</a><a href="projects.html">Projects</a><a href="interests.html">Life</a><a href="blog.html">Notes</a><a href="files/CV_Zimeng_Wang.pdf" download>Download CV</a>
+    </div>
+
+    <main id="main">
+      <section class="page-hero" aria-labelledby="lost-title">
+        <div class="shell">
+          <p class="eyebrow" data-reveal><span class="eyebrow__idx">404</span> Lost trajectory</p>
+          <p class="lost-code" aria-hidden="true" data-reveal style="--reveal-order: 1;">4<em>0</em>4</p>
+          <h1 id="lost-title" data-reveal style="--reveal-order: 2;">This trajectory left the workspace.</h1>
+          <p class="lead" data-reveal style="--reveal-order: 3;">
+            The link may be outdated or the page has moved — but every other
+            route on this site still converges. Replan from home.
+          </p>
+          <div class="lost-actions" data-reveal style="--reveal-order: 4;">
+            <a class="btn btn--solid" href="index.html">Return home</a>
+            <a class="btn btn--ghost" href="research.html">Explore research</a>
+          </div>
+        </div>
       </section>
     </main>
-    <footer class="site-footer">
-      <p>&copy; <span data-current-year></span> Zimeng Wang.</p>
-      <div class="footer-links">
-        <a href="mailto:zimeng.wang@aalto.fi">Email</a>
-        <a href="https://github.com/Pest1cide" rel="noopener noreferrer">GitHub</a>
-        <a href="https://fi.linkedin.com/in/zimeng-wang-444815332" rel="noopener noreferrer">LinkedIn</a>
-      </div>
-    </footer>
+
+    <footer class="site-footer"><div class="shell">
+      <p>&copy; <span data-current-year></span> Zimeng Wang — built by hand, no frameworks.</p>
+      <div class="footer-links"><a href="research.html">Research</a><a href="projects.html">Projects</a><a href="interests.html">Life</a><a href="blog.html">Notes</a></div>
+    </div></footer>
   </body>
 </html>

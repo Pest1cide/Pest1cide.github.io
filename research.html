@@ -3,177 +3,398 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Research by Zimeng Wang on obstacle-aware manipulation, dynamical systems, distance representations, and multi-agent planning.">
+    <meta name="description" content="Research by Zimeng Wang: self-supervised configuration-space distance functions (SCDF), benchmarking MPPI against reactive dynamical systems for obstacle-aware manipulation, and scalable multi-agent path finding.">
+    <meta name="theme-color" content="#0b0b0d">
     <title>Research | Zimeng Wang</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/studio.css">
+    <script defer src="assets/js/studio.js"></script>
     <script defer src="assets/js/site.js"></script>
+    <style>
+      /* ---- Page-specific: research.html ---- */
+      .page-hero h1 em { font-style: normal; color: var(--accent); }
+      .hero-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.8rem; }
+
+      .section-head h2 { max-width: 26ch; }
+
+      .study {
+        display: grid;
+        grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+        gap: clamp(2rem, 5vw, 4.5rem);
+        align-items: start;
+      }
+      .study__body p { color: var(--ink-dim); }
+      .study__body p + p { margin-top: 0.95rem; }
+      .study__meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.3rem; }
+      .study__supervisors { margin-top: 1.4rem; font-size: 0.82rem; color: var(--ink-faint); }
+      .study__supervisors a {
+        color: var(--ink-dim);
+        border-bottom: 1px solid var(--hair);
+        transition: color 0.2s;
+      }
+      .study__supervisors a:hover { color: var(--accent-bright); }
+      .study__media { display: grid; gap: 1.2rem; align-content: start; }
+      .study__wide { margin-top: clamp(1.6rem, 4vh, 2.6rem); }
+
+      /* Media tweaks: let wide research plots keep their native aspect */
+      .study .media-frame--stack { grid-template-columns: 1fr; }
+      .study .media-frame--stack video { aspect-ratio: 24 / 11; }
+      .frame-natural video, .frame-natural img { aspect-ratio: auto; }
+
+      .method-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.4rem;
+      }
+      .method-card {
+        padding: 1.7rem 1.7rem 1.8rem;
+        border: 1px solid var(--hair-soft);
+        border-radius: var(--radius);
+        background: var(--panel);
+        transition: background 0.3s, border-color 0.3s;
+      }
+      .method-card:hover { background: var(--panel-hover); border-color: var(--hair); }
+      .method-card h3 { font-size: 1.12rem; margin-bottom: 0.55rem; }
+      .method-card p { font-size: 0.92rem; color: var(--ink-dim); }
+      .method-foot { margin-top: 1.8rem; font-size: 0.9rem; color: var(--ink-faint); max-width: 68ch; }
+      .method-foot a {
+        color: var(--ink-dim);
+        border-bottom: 1px solid var(--hair);
+        transition: color 0.2s;
+      }
+      .method-foot a:hover { color: var(--accent-bright); }
+
+      /* Repo cards rendered by site.js into [data-repo-list] */
+      .repo-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.4rem;
+      }
+      .repo-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.3rem;
+        padding: 1.7rem 1.8rem 1.8rem;
+        border: 1px solid var(--hair-soft);
+        border-radius: var(--radius);
+        background: var(--panel);
+        transition: background 0.3s, border-color 0.3s;
+      }
+      .repo-card:hover { background: var(--panel-hover); border-color: var(--hair); }
+      .repo-card .card__meta {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--accent-bright);
+        margin-bottom: 0.6rem;
+      }
+      .repo-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+      .repo-card p { font-size: 0.93rem; color: var(--ink-dim); }
+      .repo-card .muted { margin-top: 0.45rem; font-size: 0.8rem; }
+      .repo-card__topics {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        margin-top: 0.9rem;
+        padding: 0;
+      }
+      .repo-card__topics .tag {
+        padding: 0.24rem 0.72rem;
+        border: 1px solid var(--hair);
+        border-radius: 99px;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        color: var(--ink-dim);
+        white-space: nowrap;
+      }
+      .repo-card .button {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.5rem 1.1rem;
+        border: 1px solid var(--hair);
+        border-radius: 99px;
+        font-family: var(--font-display);
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        transition: border-color 0.3s, color 0.3s, transform 0.3s var(--ease-out);
+      }
+      .repo-card .button:hover {
+        border-color: var(--accent);
+        color: var(--accent-bright);
+        transform: translateY(-2px);
+      }
+      .repo-outro { margin-top: 2.6rem; color: var(--ink-dim); max-width: 62ch; }
+
+      @media (max-width: 960px) {
+        .study { grid-template-columns: 1fr; }
+        .method-grid { grid-template-columns: 1fr; }
+        .repo-list { grid-template-columns: 1fr; }
+      }
+    </style>
   </head>
   <body data-page="research">
     <a class="skip-link" href="#main">Skip to content</a>
+
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Zimeng Wang home">
         <span class="brand__mark">ZW</span>
         <span class="brand__text">Zimeng Wang</span>
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="index.html" data-nav="home">Home</a>
-        <a href="research.html" data-nav="research">Research</a>
-        <a href="projects.html" data-nav="projects">Projects</a>
-        <a href="interests.html" data-nav="interests">Life</a>
-        <a href="blog.html" data-nav="blog">Notes</a>
+        <a href="index.html">Home</a>
+        <a href="research.html" class="is-active">Research</a>
+        <a href="projects.html">Projects</a>
+        <a href="interests.html">Life</a>
+        <a href="blog.html">Notes</a>
       </nav>
+      <a class="btn btn--ghost btn--sm header-cta" href="files/CV_Zimeng_Wang.pdf" download>CV ↓</a>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
     </header>
+    <div class="nav-overlay">
+      <a href="index.html">Home</a><a href="research.html">Research</a><a href="projects.html">Projects</a><a href="interests.html">Life</a><a href="blog.html">Notes</a><a href="files/CV_Zimeng_Wang.pdf" download>Download CV</a>
+    </div>
 
-    <main id="main" class="page-shell">
-      <section class="page-heading">
-        <p class="section__label">Research</p>
-        <h1>Safe motion for robots in complicated worlds.</h1>
-        <p class="lead">
-          My research sits between control, motion planning, and robot learning. I focus on representations
-          and policies that help manipulators move efficiently around obstacles without losing the structure
-          that makes their behavior understandable.
-        </p>
-      </section>
-
-      <section class="section section--no-top">
-        <div class="project-feature">
-          <div class="project-feature__media">
-            <img src="assets/img/franka-obstacle-avoidance.jpg" alt="Franka robot trajectory samples around obstacles.">
-          </div>
-          <div class="project-feature__copy">
-            <p class="card__meta">Current focus · EPFL LASA</p>
-            <h2>Obstacle avoidance with coupled dynamical systems</h2>
-            <p>
-              Under the supervision of Prof. Aude Billard and Dr. Rui Wu, I am investigating
-              manipulability-aware diffeomorphic dynamical systems for safe and efficient robot motion.
-              The work combines obstacle avoidance and manipulability optimization while preserving useful
-              stability and contraction properties.
-            </p>
-            <div class="project-feature__links">
-              <a class="text-link" href="https://lasa.epfl.ch/" rel="noopener noreferrer">EPFL LASA</a>
-            </div>
+    <main id="main">
+      <!-- Page hero -->
+      <section class="page-hero">
+        <div class="shell" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__idx">02</span> Research</p>
+          <h1>Geometry a robot<br>can <em>act on</em>.</h1>
+          <p class="lead">
+            My research sits between control, motion planning, and robot learning: distance
+            representations that tell a manipulator how close it is to collision — in the
+            configuration space where decisions are actually made — and reactive motion
+            generation that turns that geometry into safe, efficient movement around obstacles.
+          </p>
+          <div class="hero-chips" aria-label="Research topics">
+            <span class="chip">Distance fields</span>
+            <span class="chip">Dynamical systems</span>
+            <span class="chip">Sampling-based control</span>
+            <span class="chip">Robot learning</span>
+            <span class="chip">Multi-agent planning</span>
           </div>
         </div>
       </section>
 
-      <section class="section section--dark">
-        <div class="section__header">
-          <p class="section__label">Research questions</p>
-          <h2>The problems I keep returning to.</h2>
-        </div>
-        <div class="card-grid">
-          <article class="card card--dark">
-            <div class="card__body">
-              <p class="card__meta">01 · Representation</p>
-              <h3>What should a robot know about distance?</h3>
-              <p>Exploring self-supervised configuration-space distance functions that retain useful distance and gradient information for manipulation.</p>
+      <!-- 01 · SCDF thesis -->
+      <section class="section section--hairline" id="scdf">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <div>
+              <p class="eyebrow"><span class="eyebrow__idx">01</span> Master&rsquo;s thesis</p>
+              <h2>SCDF — self-supervised configuration-space distance fields</h2>
             </div>
-          </article>
-          <article class="card card--dark">
-            <div class="card__body">
-              <p class="card__meta">02 · Control</p>
-              <h3>How can safety shape motion without freezing it?</h3>
-              <p>Combining dynamical systems, geometric transformations, and sampling-based control to produce responsive obstacle-aware behavior.</p>
-            </div>
-          </article>
-          <article class="card card--dark">
-            <div class="card__body">
-              <p class="card__meta">03 · Learning</p>
-              <h3>When does learned geometry improve a policy?</h3>
-              <p>Evaluating whether distance-field observations improve reinforcement-learning efficiency and collision avoidance in manipulation tasks.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="two-column">
-          <div>
-            <p class="section__label">Experience</p>
-            <h2>Research timeline</h2>
           </div>
-          <div class="timeline">
-            <article class="timeline__item">
-              <p class="timeline__date">Sep 2025–Present</p>
-              <div>
-                <h3>Visiting student research project · EPFL LASA</h3>
-                <p>Obstacle-aware manipulation with coupled dynamical systems, learned distance representations, MPPI benchmarks, and reinforcement-learning experiments.</p>
+          <div class="study">
+            <div class="study__body" data-reveal>
+              <div class="study__meta">
+                <span class="chip chip--accent">Feb — Dec 2026 · ongoing</span>
+                <span class="chip">Idiap / EPFL · Robot Learning &amp; Interaction</span>
               </div>
-            </article>
-            <article class="timeline__item">
-              <p class="timeline__date">Sep 2024–Jun 2025</p>
-              <div>
-                <h3>Research assistant · Aalto Mobile Robotics Group</h3>
-                <p>Studied the scalability of decentralized path planning with local coordinators and optimized Hybrid Velocity Obstacle methods for multi-agent systems.</p>
-              </div>
-            </article>
-            <article class="timeline__item">
-              <p class="timeline__date">2023–2024</p>
-              <div>
-                <h3>Undergraduate thesis · SUSTech</h3>
-                <p>Developed control algorithms for the Achilles-1 wheel-legged robot, building on LQR, Virtual Model Control, simulation, and hardware verification.</p>
-              </div>
-            </article>
+              <p>
+                A configuration-space distance function (CDF) gives a manipulator something rare:
+                a distance to collision measured directly in joint space, whose gradient can pull
+                an entire configuration out of trouble — and, aimed at a target point, solve
+                inverse kinematics in a single step. The catch is supervision. Training a CDF
+                requires ground-truth distances computed in configuration space, and generating
+                those labels is expensive enough to limit where the representation can go.
+              </p>
+              <p>
+                SCDF, my master&rsquo;s thesis, asks whether the labels are necessary at all. It is a
+                self-supervised, physics-informed neural distance field: instead of consuming
+                precomputed C-space distances, training couples the network to the geometry it must
+                respect — gradients, Eikonal-style objectives, and configuration-space reasoning —
+                removing the labelling step entirely while preserving the one-step
+                inverse-kinematics property that makes CDF worth having.
+              </p>
+              <p>
+                The second question is when learned geometry actually helps. SCDF is evaluated
+                inside both learning-based and gradient-based motion pipelines, in controlled
+                comparisons against JSDF, CDF, RDF, and PointNet baselines — from 2-D
+                reinforcement-learning tasks, which test whether distance-field observations
+                improve learning efficiency and collision avoidance, up to 7-DoF manipulators.
+              </p>
+              <p>
+                The thesis runs from February to December 2026 with the Robot Learning &amp;
+                Interaction group at Idiap / EPFL and is ongoing: representation, baselines, and
+                evaluation tooling are all in active development.
+              </p>
+              <p class="study__supervisors">
+                With <a href="https://calinon.ch/" rel="noopener noreferrer">Sylvain Calinon</a>,
+                <a href="https://baumanndominik.github.io/" rel="noopener noreferrer">Dominik Baumann</a>
+                and <a href="https://yimingli1998.github.io/" rel="noopener noreferrer">Yiming Li</a>
+              </p>
+            </div>
+            <div class="study__media">
+              <figure class="media-frame media-frame--stack" data-reveal style="--reveal-order: 1;">
+                <video data-autoplay muted loop playsinline preload="metadata" src="assets/media/scdf_rl_success1.mp4" aria-label="SCDF evaluation rollout: planar arm reaching a goal among obstacles, shown in workspace and joint space"></video>
+                <video data-autoplay muted loop playsinline preload="metadata" src="assets/media/scdf_rl_success2.mp4" aria-label="Second SCDF evaluation rollout reaching the goal through the joint-space collision regions"></video>
+                <figcaption>SCDF evaluation rollouts — workspace &amp; joint-space views</figcaption>
+              </figure>
+              <figure class="media-frame media-frame--contain frame-natural" data-reveal style="--reveal-order: 2;">
+                <img src="assets/media/iiwa_sdf_slice.png" alt="Signed-distance-field slice visualisations of a KUKA iiwa manipulator" loading="lazy">
+                <figcaption>SDF slice of a KUKA iiwa, from the thesis tooling</figcaption>
+              </figure>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section section--warm">
-        <div class="section__header">
-          <p class="section__label">Public code</p>
-          <h2>Repositories connected to my work.</h2>
-          <p class="section__intro">A focused set of confirmed public repositories from my GitHub account. Research still in progress is described at a high level.</p>
-        </div>
-        <div class="repo-list" data-repo-list>
-          <p class="muted">Loading repository entries...</p>
+      <!-- 02 · LASA benchmark -->
+      <section class="section section--hairline" id="lasa">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <div>
+              <p class="eyebrow"><span class="eyebrow__idx">02</span> Reactive motion</p>
+              <h2>When to optimize, when to react: MPPI vs. dynamical systems</h2>
+            </div>
+          </div>
+          <div class="study">
+            <div class="study__body" data-reveal>
+              <div class="study__meta">
+                <span class="chip chip--accent">Sept 2025 — present</span>
+                <span class="chip">LASA · EPFL · visiting project</span>
+              </div>
+              <p>
+                Obstacle-aware motion generation has two strong traditions. Sampling-based optimal
+                control — MPPI — rolls out thousands of candidate trajectories in parallel and
+                picks its way through a cost landscape; geometrically-guided dynamical systems
+                reshape a nominal motion around obstacles in closed form. Each has strengths the
+                other lacks, so when should a robot optimize, and when should it simply react?
+              </p>
+              <p>
+                As a visiting student at LASA, I am building the benchmark to answer that:
+                GPU-accelerated MPPI on NVIDIA cuRobo, compared systematically against
+                geometrically-guided hybrid dynamical systems for reactive motion planning.
+              </p>
+              <p>
+                Alongside the benchmark, the project develops a hybrid motion-generation framework
+                for a 7-DoF Franka Emika Panda that couples diffeomorphic transformations with
+                implicit neural representations — Neural-JSDF and CDF — for stable obstacle
+                avoidance. The aim is manipulability-aware motion: combining obstacle avoidance
+                with manipulability optimization while keeping the stability and contraction
+                properties that make dynamical systems trustworthy.
+              </p>
+              <p class="study__supervisors">
+                With <a href="https://people.epfl.ch/aude.billard" rel="noopener noreferrer">Aude Billard</a>
+                and <a href="https://scholar.google.com/citations?user=IH4FwSAAAAAJ" rel="noopener noreferrer">Rui Wu</a>
+              </p>
+            </div>
+            <div class="study__media">
+              <figure class="media-frame media-frame--contain frame-natural" data-reveal style="--reveal-order: 1;">
+                <video data-autoplay muted loop playsinline preload="metadata" src="assets/media/lasa_mppi_small.mp4" aria-label="MPPI trajectory samples fanning out from the current state on a point-mass example"></video>
+                <figcaption>MPPI in miniature — sampled rollouts, point-mass example</figcaption>
+              </figure>
+            </div>
+          </div>
+          <figure class="media-frame media-frame--contain frame-natural study__wide" data-reveal>
+            <video data-autoplay muted loop playsinline preload="metadata" src="assets/media/lasa_mppi_demo.mp4" aria-label="Planar arm avoiding a circular obstacle while MPPI rollouts explore a joint-space cost field"></video>
+            <figcaption>MPPI rollouts over a joint-space cost field — planar-arm scenario</figcaption>
+          </figure>
         </div>
       </section>
 
-      <section class="section">
-        <div class="two-column">
-          <div>
-            <p class="section__label">Methods & tools</p>
-            <h2>How I work</h2>
+      <!-- 03 · Multi-agent path finding -->
+      <section class="section section--hairline" id="mapf">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <div>
+              <p class="eyebrow"><span class="eyebrow__idx">03</span> Multi-agent planning</p>
+              <h2>How far does decentralized path finding scale?</h2>
+            </div>
           </div>
-          <div class="stack">
-            <article class="plain-block">
+          <div class="study">
+            <div class="study__body" data-reveal>
+              <div class="study__meta">
+                <span class="chip chip--accent">Sept 2024 — Jun 2025</span>
+                <span class="chip">Aalto · Mobile Robotics Group · research assistant</span>
+              </div>
+              <p>
+                Before Lausanne, at Aalto&rsquo;s Mobile Robotics Group, I worked on a different flavour
+                of the same problem: many robots sharing one space, with no central choreographer.
+                The research question was scalability — how well decentralized path planning with
+                local coordinators holds up as the number of agents grows, compared with planning
+                for the whole fleet globally.
+              </p>
+              <p>
+                I introduced and optimized hybrid velocity-obstacle methods for decentralized
+                collision avoidance among the agents. In simulations with 12 agents, the approach
+                improved overall planning efficiency by 10% over global planners.
+              </p>
+              <p>
+                A public research fork connected to this work, <strong>rl_rvo</strong>, appears in
+                the repositories below.
+              </p>
+              <p class="study__supervisors">
+                With <a href="https://www.aalto.fi/en/people/tomasz-kucner" rel="noopener noreferrer">Tomasz Kucner</a>,
+                Mobile Robotics Group
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 · Method -->
+      <section class="section section--hairline" id="method">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <div>
+              <p class="eyebrow"><span class="eyebrow__idx">04</span> Method</p>
+              <h2>How I work.</h2>
+            </div>
+          </div>
+          <div class="method-grid">
+            <article class="method-card" data-reveal>
               <h3>Model, then interrogate the model</h3>
-              <p>I use controlled simulations and explicit baselines to understand when a new representation or controller helps, and where it fails.</p>
+              <p>Controlled simulations and explicit baselines, to understand when a new representation or controller helps — and where it fails.</p>
             </article>
-            <article class="plain-block">
+            <article class="method-card" data-reveal style="--reveal-order: 1;">
               <h3>Connect learning to geometry</h3>
               <p>My current experiments combine neural distance fields, gradients, Eikonal-style objectives, and configuration-space reasoning.</p>
             </article>
-            <article class="plain-block">
+            <article class="method-card" data-reveal style="--reveal-order: 2;">
               <h3>Build the full path to evaluation</h3>
               <p>Python, C++, PyTorch, ROS, Isaac Lab, PyBullet, Genesis, MATLAB, and experiment tooling all appear when the question requires them.</p>
             </article>
           </div>
+          <p class="method-foot" data-reveal style="--reveal-order: 3;">
+            The habit of verifying on real systems dates back to my undergraduate thesis at SUSTech:
+            control algorithms for the Achilles-1 wheel-legged robot, building on LQR, virtual model
+            control, simulation, and hardware verification —
+            <a href="projects.html">more on the projects page</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- 05 · Public code -->
+      <section class="section section--hairline" id="code">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <div>
+              <p class="eyebrow"><span class="eyebrow__idx">05</span> Public code</p>
+              <h2>Repositories connected to my work.</h2>
+            </div>
+            <p class="lead">A focused set of confirmed public repositories from my GitHub account. Research still in progress is described at a high level.</p>
+          </div>
+          <div class="repo-list" data-repo-list data-reveal>
+            <p class="muted">Loading repository entries…</p>
+          </div>
+          <p class="repo-outro" data-reveal>
+            I welcome conversations around safe manipulation, robot learning, dynamical systems,
+            and motion planning —
+            <a class="text-link" href="mailto:zimeng.wang@aalto.fi">zimeng.wang@aalto.fi</a>
+          </p>
         </div>
       </section>
     </main>
 
-    <section class="contact-band">
-      <div class="contact-band__inner">
-        <div>
-          <p class="section__label">Research contact</p>
-          <h2>Let’s compare approaches.</h2>
-          <p class="lead">I welcome conversations around safe manipulation, robot learning, dynamical systems, and motion planning.</p>
-        </div>
-        <div class="contact-band__actions">
-          <a class="button" href="mailto:zimeng.wang@aalto.fi">Email me</a>
-          <a class="button button--secondary" href="https://github.com/Pest1cide" rel="noopener noreferrer">View GitHub</a>
-        </div>
-      </div>
-    </section>
-
-    <footer class="site-footer">
-      <p>&copy; <span data-current-year></span> Zimeng Wang.</p>
-      <div class="footer-links">
-        <a href="mailto:zimeng.wang@aalto.fi">Email</a>
-        <a href="https://github.com/Pest1cide" rel="noopener noreferrer">GitHub</a>
-        <a href="https://fi.linkedin.com/in/zimeng-wang-444815332" rel="noopener noreferrer">LinkedIn</a>
-      </div>
-    </footer>
+    <footer class="site-footer"><div class="shell">
+      <p>&copy; <span data-current-year></span> Zimeng Wang — built by hand, no frameworks.</p>
+      <div class="footer-links"><a href="research.html">Research</a><a href="projects.html">Projects</a><a href="interests.html">Life</a><a href="blog.html">Notes</a></div>
+    </div></footer>
   </body>
 </html>

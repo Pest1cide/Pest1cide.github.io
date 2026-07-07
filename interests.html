@@ -3,124 +3,317 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Life beyond the lab: places, perspectives, and interests that shape Zimeng Wang's approach to robotics.">
-    <title>Life | Zimeng Wang</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <script defer src="assets/js/site.js"></script>
+    <meta name="description" content="Life beyond the lab — climbing, cycling, and photography across Shenzhen, Helsinki, and Lausanne, and the perspectives that shape Zimeng Wang's robotics research.">
+    <meta name="theme-color" content="#0b0b0d">
+    <title>Beyond the Lab | Zimeng Wang</title>
+    <link rel="stylesheet" href="assets/css/studio.css">
+    <script defer src="assets/js/studio.js"></script>
+    <style>
+      /* ---- Page-specific: interests / beyond the lab ---- */
+      .hobby {
+        display: grid;
+        grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+        gap: clamp(2rem, 5vw, 4.5rem);
+        align-items: center;
+      }
+      .hobby--flip .hobby__media { order: 2; }
+      .hobby__media img { aspect-ratio: 4 / 3; }
+      .hobby__media--tall img { aspect-ratio: 4 / 4.4; }
+      .hobby__tag {
+        display: inline-block;
+        margin-bottom: 0.7rem;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--accent-bright);
+      }
+      .hobby__body h2 {
+        font-size: clamp(2rem, 4.5vw, 3.1rem);
+        margin-bottom: 1rem;
+      }
+      .hobby__body p {
+        color: var(--ink-dim);
+        max-width: 48ch;
+      }
+      .hobby__body p + p { margin-top: 0.8rem; }
+      .hobby__soon {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        margin-top: 1.5rem;
+        padding: 0.42rem 1rem;
+        border: 1px dashed var(--hair);
+        border-radius: 99px;
+        font-family: var(--font-display);
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+      }
+      .hobby__soon::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: pulse 2.4s ease-in-out infinite;
+      }
+      /* Future stories attach below each hobby intro */
+      .beyond-entries {
+        display: grid;
+        gap: 0.9rem;
+        margin-top: clamp(2rem, 5vh, 3rem);
+      }
+      .beyond-entry {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 1.4rem;
+        align-items: baseline;
+        padding: 1.4rem 1.6rem;
+        border: 1px solid var(--hair-soft);
+        border-radius: var(--radius);
+        background: var(--panel);
+        transition: background 0.3s, border-color 0.3s;
+      }
+      .beyond-entry:hover { background: var(--panel-hover); border-color: var(--hair); }
+      .beyond-entry time {
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        color: var(--accent);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+      .beyond-entry h3 { font-size: 1.12rem; margin-bottom: 0.3rem; }
+      .beyond-entry p { font-size: 0.92rem; color: var(--ink-dim); }
+      /* Compact panels for constants + background */
+      .facet-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.4rem;
+      }
+      .facet {
+        padding: 1.6rem 1.7rem 1.8rem;
+        border: 1px solid var(--hair-soft);
+        border-radius: var(--radius);
+        background: var(--panel);
+        transition: background 0.3s, border-color 0.3s;
+      }
+      .facet:hover { background: var(--panel-hover); border-color: var(--hair); }
+      .facet__idx {
+        font-family: var(--font-display);
+        font-size: 0.78rem;
+        color: var(--accent);
+        font-variant-numeric: tabular-nums;
+      }
+      .facet h3 { font-size: 1.15rem; margin: 0.75rem 0 0.5rem; }
+      .facet p { font-size: 0.92rem; color: var(--ink-dim); }
+      @media (max-width: 960px) {
+        .hobby { grid-template-columns: 1fr; }
+        .hobby--flip .hobby__media { order: 0; }
+        .facet-grid { grid-template-columns: 1fr; }
+      }
+    </style>
   </head>
   <body data-page="interests">
     <a class="skip-link" href="#main">Skip to content</a>
+
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Zimeng Wang home">
         <span class="brand__mark">ZW</span>
         <span class="brand__text">Zimeng Wang</span>
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="index.html" data-nav="home">Home</a>
-        <a href="research.html" data-nav="research">Research</a>
-        <a href="projects.html" data-nav="projects">Projects</a>
-        <a href="interests.html" data-nav="interests">Life</a>
-        <a href="blog.html" data-nav="blog">Notes</a>
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="projects.html">Projects</a>
+        <a href="interests.html" class="is-active">Life</a>
+        <a href="blog.html">Notes</a>
       </nav>
+      <a class="btn btn--ghost btn--sm header-cta" href="files/CV_Zimeng_Wang.pdf" download>CV ↓</a>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
     </header>
+    <div class="nav-overlay">
+      <a href="index.html">Home</a><a href="research.html">Research</a><a href="projects.html">Projects</a><a href="interests.html">Life</a><a href="blog.html">Notes</a><a href="files/CV_Zimeng_Wang.pdf" download>Download CV</a>
+    </div>
 
-    <main id="main" class="page-shell">
-      <section class="page-heading">
-        <p class="section__label">Life beyond the lab</p>
-        <h1>Places change the way I see problems.</h1>
-        <p class="lead">
-          I grew into robotics across Shenzhen, Helsinki, and Lausanne. Each place brought a different
-          research culture, landscape, and way of thinking. This page is a small visual record of the
-          world around the work.
-        </p>
-      </section>
-
-      <section class="section section--no-top">
-        <div class="photo-grid">
-          <figure>
-            <img src="assets/img/zermatt.jpg" alt="The Matterhorn above Zermatt at dusk.">
-            <figcaption>Zermatt · Switzerland</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/img/epfl-campus.jpg" alt="EPFL campus framed by trees and mountains.">
-            <figcaption>EPFL · Lausanne</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/img/lake-geneva.jpg" alt="Lake Geneva and the mountains seen from the EPFL area.">
-            <figcaption>Lake Geneva</figcaption>
-          </figure>
+    <main id="main">
+      <!-- Page hero -->
+      <section class="page-hero">
+        <div class="shell">
+          <p class="eyebrow" data-reveal><span class="eyebrow__idx">04</span> Life</p>
+          <h1 data-reveal style="--reveal-order: 1;">Beyond the lab</h1>
+          <p class="lead" data-reveal style="--reveal-order: 2;">
+            Places change the way I see problems. I grew into robotics across Shenzhen, Helsinki,
+            and Lausanne — each brought a different research culture, landscape, and way of
+            thinking. This page is a record of the world around the work: the mountains, the
+            roads, and the photographs in between.
+          </p>
         </div>
       </section>
 
-      <section class="section">
-        <div class="section__header">
-          <p class="section__label">A few constants</p>
-          <h2>What stays with me between projects.</h2>
-        </div>
-        <div class="interest-grid">
-          <article class="interest">
-            <span class="interest__index">01</span>
-            <h3>Learning by building</h3>
-            <p>I understand an idea best when I can turn it into a model, run it, break it, and make the next experiment sharper.</p>
-          </article>
-          <article class="interest">
-            <span class="interest__index">02</span>
-            <h3>Crossing disciplines</h3>
-            <p>Robotics keeps me moving between mechanics, control, software, learning, and the human context around a system.</p>
-          </article>
-          <article class="interest">
-            <span class="interest__index">03</span>
-            <h3>Looking outward</h3>
-            <p>Travel and photography create space to notice structure, scale, and motion outside a simulator or laboratory.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section section--warm">
-        <div class="two-column">
-          <div>
-            <p class="section__label">Background</p>
-            <h2>At home in more than one context.</h2>
+      <!-- Climbing -->
+      <section class="section section--hairline" id="climbing">
+        <div class="shell">
+          <div class="hobby" data-reveal>
+            <figure class="media-frame hobby__media hobby__media--tall">
+              <img src="assets/img/zermatt.jpg" alt="The Matterhorn above Zermatt at dusk" loading="lazy">
+              <figcaption>Zermatt · Switzerland</figcaption>
+            </figure>
+            <div class="hobby__body">
+              <span class="hobby__tag">In the mountains</span>
+              <h2>Climbing</h2>
+              <p>
+                Routes, granite, and patience. Living between Helsinki and Lausanne puts the Alps
+                within reach, and the mountains have become the counterweight to lab hours —
+                a place where progress is measured one hold at a time.
+              </p>
+              <p>
+                The proper stories — routes, crags, and lessons learned the hard way — are still
+                being written. They will land here as they happen.
+              </p>
+              <span class="hobby__soon">Stories coming soon</span>
+            </div>
           </div>
-          <div class="stack">
-            <article class="plain-block">
+          <div class="beyond-entries">
+            <!-- Add climbing entries here: copy this article.beyond-entry pattern, one per story, newest first.
+            <article class="beyond-entry" data-reveal>
+              <time datetime="2026-07">Jul 2026</time>
+              <div>
+                <h3>Route or crag name</h3>
+                <p>One or two sentences on what happened and what it taught you.</p>
+              </div>
+            </article>
+            -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Cycling -->
+      <section class="section section--hairline" id="cycling">
+        <div class="shell">
+          <div class="hobby hobby--flip" data-reveal>
+            <figure class="media-frame hobby__media">
+              <img src="assets/img/lake-geneva.jpg" alt="Lake Geneva and the mountains seen from the EPFL area" loading="lazy">
+              <figcaption>Lake Geneva</figcaption>
+            </figure>
+            <div class="hobby__body">
+              <span class="hobby__tag">On the road</span>
+              <h2>Cycling</h2>
+              <p>
+                Lakeside kilometres between Lausanne and everywhere else. The shore of Lake Geneva
+                is hard to beat for clearing a head full of distance fields — long, quiet stretches
+                where the only optimization problem is pacing.
+              </p>
+              <p>
+                Ride notes and favourite roads will fill this section as the kilometres add up.
+              </p>
+              <span class="hobby__soon">Rides coming soon</span>
+            </div>
+          </div>
+          <div class="beyond-entries">
+            <!-- Add cycling entries here: copy this article.beyond-entry pattern, one per ride or route, newest first.
+            <article class="beyond-entry" data-reveal>
+              <time datetime="2026-07">Jul 2026</time>
+              <div>
+                <h3>Route name or destination</h3>
+                <p>One or two sentences about the ride — distance, views, surprises.</p>
+              </div>
+            </article>
+            -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Photography -->
+      <section class="section section--hairline" id="photography">
+        <div class="shell">
+          <div class="hobby" data-reveal>
+            <figure class="media-frame hobby__media">
+              <img src="assets/img/epfl-campus.jpg" alt="EPFL campus framed by trees and mountains" loading="lazy">
+              <figcaption>EPFL · Lausanne</figcaption>
+            </figure>
+            <div class="hobby__body">
+              <span class="hobby__tag">Behind the lens</span>
+              <h2>Photography</h2>
+              <p>
+                A small visual record of the world around the work: the Matterhorn above Zermatt
+                at dusk, the EPFL campus framed by trees and mountains, Lake Geneva from the shore.
+              </p>
+              <p>
+                Photography creates space to notice structure, scale, and motion outside a
+                simulator or laboratory — more frames will join these as the record grows.
+              </p>
+            </div>
+          </div>
+          <!-- Add photographs here: duplicate the figure.media-frame pattern above (with alt text and a figcaption) inside a .beyond-entries grid, or extend .hobby__media into a gallery. -->
+        </div>
+      </section>
+
+      <!-- Constants & background -->
+      <section class="section section--hairline" id="constants">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <div>
+              <p class="eyebrow">A few constants</p>
+              <h2>What stays with me between projects.</h2>
+            </div>
+          </div>
+          <div class="facet-grid">
+            <article class="facet" data-reveal>
+              <span class="facet__idx">01</span>
+              <h3>Learning by building</h3>
+              <p>I understand an idea best when I can turn it into a model, run it, break it, and make the next experiment sharper.</p>
+            </article>
+            <article class="facet" data-reveal style="--reveal-order: 1;">
+              <span class="facet__idx">02</span>
+              <h3>Crossing disciplines</h3>
+              <p>Robotics keeps me moving between mechanics, control, software, learning, and the human context around a system.</p>
+            </article>
+            <article class="facet" data-reveal style="--reveal-order: 2;">
+              <span class="facet__idx">03</span>
+              <h3>Looking outward</h3>
+              <p>Travel and photography create space to notice structure, scale, and motion outside a simulator or laboratory.</p>
+            </article>
+            <article class="facet" data-reveal style="--reveal-order: 3;">
+              <span class="facet__idx">04</span>
               <h3>Languages</h3>
               <p>Mandarin is my native language, and English is the working language of my international study and research.</p>
             </article>
-            <article class="plain-block">
+            <article class="facet" data-reveal style="--reveal-order: 4;">
+              <span class="facet__idx">05</span>
               <h3>Communities</h3>
               <p>My path has included SUSTech robotics teams, Aalto research and project groups, EPFL LASA, competitions, and hackathons.</p>
             </article>
-            <article class="plain-block">
+            <article class="facet" data-reveal style="--reveal-order: 5;">
+              <span class="facet__idx">06</span>
               <h3>Perspective</h3>
               <p>I value teams that combine technical ambition with direct communication, careful experiments, and the willingness to learn across fields.</p>
             </article>
           </div>
         </div>
       </section>
+
+      <!-- Say hello -->
+      <section class="contact section--hairline" id="contact">
+        <div class="shell" data-reveal>
+          <p class="eyebrow">Say hello</p>
+          <h2>Research is better with a <em>wider view</em>.</h2>
+          <a class="contact__email" href="mailto:zimeng.wang@aalto.fi">zimeng.wang@aalto.fi</a>
+          <p class="lead" style="margin-top: 1.4rem;">
+            Reach out about robotics, study across different research environments, or a good
+            mountain route.
+          </p>
+          <div class="contact__links">
+            <a class="btn btn--ghost" href="https://github.com/Pest1cide" rel="noopener noreferrer">GitHub</a>
+            <a class="btn btn--ghost" href="https://fi.linkedin.com/in/zimeng-wang-444815332" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <section class="contact-band">
-      <div class="contact-band__inner">
-        <div>
-          <p class="section__label">Say hello</p>
-          <h2>Research is better with a wider view.</h2>
-          <p class="lead">Reach out about robotics, study across different research environments, or a good mountain route.</p>
-        </div>
-        <div class="contact-band__actions">
-          <a class="button" href="mailto:zimeng.wang@aalto.fi">Email me</a>
-          <a class="button button--secondary" href="https://fi.linkedin.com/in/zimeng-wang-444815332" rel="noopener noreferrer">LinkedIn</a>
-        </div>
-      </div>
-    </section>
-
-    <footer class="site-footer">
-      <p>&copy; <span data-current-year></span> Zimeng Wang.</p>
-      <div class="footer-links">
-        <a href="mailto:zimeng.wang@aalto.fi">Email</a>
-        <a href="https://github.com/Pest1cide" rel="noopener noreferrer">GitHub</a>
-        <a href="https://fi.linkedin.com/in/zimeng-wang-444815332" rel="noopener noreferrer">LinkedIn</a>
-      </div>
-    </footer>
+    <footer class="site-footer"><div class="shell">
+      <p>&copy; <span data-current-year></span> Zimeng Wang — built by hand, no frameworks.</p>
+      <div class="footer-links"><a href="research.html">Research</a><a href="projects.html">Projects</a><a href="interests.html">Life</a><a href="blog.html">Notes</a></div>
+    </div></footer>
   </body>
 </html>

@@ -3,65 +3,153 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Notes by Zimeng Wang on robotics research, control, learning, and building embodied systems.">
+    <meta name="description" content="Field notes by Zimeng Wang on robotics research, control, learning, and building embodied systems.">
+    <meta name="theme-color" content="#0b0b0d">
     <title>Notes | Zimeng Wang</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <script defer src="assets/js/site.js"></script>
+    <link rel="stylesheet" href="assets/css/studio.css">
+    <script defer src="assets/js/studio.js"></script>
+    <style>
+      /* Page-specific: chips inside note rows + slightly larger titles on the index */
+      .notes-index .note-row { padding-block: 1.9rem; }
+      .notes-index .note-row h3 { font-size: 1.35rem; }
+      .note-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 0.8rem;
+      }
+    </style>
   </head>
   <body data-page="blog">
     <a class="skip-link" href="#main">Skip to content</a>
+
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Zimeng Wang home">
         <span class="brand__mark">ZW</span>
         <span class="brand__text">Zimeng Wang</span>
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="index.html" data-nav="home">Home</a>
-        <a href="research.html" data-nav="research">Research</a>
-        <a href="projects.html" data-nav="projects">Projects</a>
-        <a href="interests.html" data-nav="interests">Life</a>
-        <a href="blog.html" data-nav="blog">Notes</a>
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="projects.html">Projects</a>
+        <a href="interests.html">Life</a>
+        <a href="blog.html" class="is-active">Notes</a>
       </nav>
+      <a class="btn btn--ghost btn--sm header-cta" href="files/CV_Zimeng_Wang.pdf" download>CV ↓</a>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
     </header>
+    <div class="nav-overlay">
+      <a href="index.html">Home</a><a href="research.html">Research</a><a href="projects.html">Projects</a><a href="interests.html">Life</a><a href="blog.html">Notes</a><a href="files/CV_Zimeng_Wang.pdf" download>Download CV</a>
+    </div>
 
-    <main id="main" class="page-shell">
-      <section class="page-heading">
-        <p class="section__label">Field notes</p>
-        <h1>What I am learning while building.</h1>
-        <p class="lead">
-          Short reflections on the reasoning behind my research and projects: what a representation gives
-          a controller, what integration teaches a team, and how an idea changes when it reaches a robot.
-        </p>
+    <main id="main">
+      <section class="page-hero">
+        <div class="shell" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__idx">05</span> Field notes</p>
+          <h1>What I am learning while building.</h1>
+          <p class="lead">
+            Short reflections on the reasoning behind my research and projects: what a representation
+            gives a controller, what integration teaches a team, and how an idea changes when it
+            reaches a robot.
+          </p>
+        </div>
       </section>
 
-      <section class="section section--no-top">
-        <div class="post-list" data-post-list>
-          <p class="muted">Loading notes...</p>
+      <section class="section section--hairline" aria-label="All notes">
+        <div class="shell notes-index">
+          <div class="notes-list" data-post-list data-reveal>
+            <p class="muted">Loading notes…</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact section--hairline" aria-label="Continue the discussion">
+        <div class="shell" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__idx">06</span> Continue the discussion</p>
+          <h2>A useful idea gets better when <em>challenged</em>.</h2>
+          <p class="lead">Send me a note if one of these topics overlaps with your work.</p>
+          <div class="contact__links">
+            <a class="btn btn--solid" href="mailto:zimeng.wang@aalto.fi">Email me</a>
+            <a class="btn btn--ghost" href="research.html">Research overview</a>
+          </div>
         </div>
       </section>
     </main>
 
-    <section class="contact-band">
-      <div class="contact-band__inner">
-        <div>
-          <p class="section__label">Continue the discussion</p>
-          <h2>A useful idea gets better when challenged.</h2>
-          <p class="lead">Send me a note if one of these topics overlaps with your work.</p>
-        </div>
-        <div class="contact-band__actions">
-          <a class="button" href="mailto:zimeng.wang@aalto.fi">Email me</a>
-          <a class="button button--secondary" href="research.html">Research overview</a>
-        </div>
-      </div>
-    </section>
+    <footer class="site-footer"><div class="shell">
+      <p>&copy; <span data-current-year></span> Zimeng Wang — built by hand, no frameworks.</p>
+      <div class="footer-links"><a href="research.html">Research</a><a href="projects.html">Projects</a><a href="interests.html">Life</a><a href="blog.html">Notes</a></div>
+    </div></footer>
 
-    <footer class="site-footer">
-      <p>&copy; <span data-current-year></span> Zimeng Wang.</p>
-      <div class="footer-links">
-        <a href="mailto:zimeng.wang@aalto.fi">Email</a>
-        <a href="https://github.com/Pest1cide" rel="noopener noreferrer">GitHub</a>
-        <a href="https://fi.linkedin.com/in/zimeng-wang-444815332" rel="noopener noreferrer">LinkedIn</a>
-      </div>
-    </footer>
+    <script>
+      /* Notes index — renders every post from data/posts.json as a .note-row. */
+      (function () {
+        'use strict';
+        var mount = document.querySelector('[data-post-list]');
+        if (!mount) return;
+
+        function formatDate(value) {
+          if (!value) return '';
+          var date = new Date(value + 'T00:00:00');
+          if (isNaN(date)) return value;
+          return new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: 'numeric' }).format(date);
+        }
+
+        function chip(label, accent) {
+          var span = document.createElement('span');
+          span.className = accent ? 'chip chip--accent' : 'chip';
+          span.textContent = label;
+          return span;
+        }
+
+        fetch('data/posts.json')
+          .then(function (r) {
+            if (!r.ok) throw new Error('Unable to load posts');
+            return r.json();
+          })
+          .then(function (posts) {
+            posts.sort(function (a, b) {
+              return String(b.date || '').localeCompare(String(a.date || ''));
+            });
+            mount.innerHTML = '';
+            posts.forEach(function (post) {
+              var row = document.createElement('a');
+              row.className = 'note-row';
+              row.href = 'post.html?post=' + encodeURIComponent(post.slug);
+
+              var time = document.createElement('time');
+              time.setAttribute('datetime', post.date || '');
+              time.textContent = formatDate(post.date);
+
+              var body = document.createElement('div');
+              var title = document.createElement('h3');
+              title.textContent = post.title || '';
+              var excerpt = document.createElement('p');
+              excerpt.textContent = post.excerpt || '';
+              body.appendChild(title);
+              body.appendChild(excerpt);
+
+              var chips = document.createElement('p');
+              chips.className = 'note-chips';
+              if (post.audience) chips.appendChild(chip(post.audience, true));
+              (post.tags || []).forEach(function (tag) { chips.appendChild(chip(tag, false)); });
+              if (chips.childNodes.length) body.appendChild(chips);
+
+              var arrow = document.createElement('span');
+              arrow.className = 'note-row__arrow';
+              arrow.setAttribute('aria-hidden', 'true');
+              arrow.textContent = '→';
+
+              row.appendChild(time);
+              row.appendChild(body);
+              row.appendChild(arrow);
+              mount.appendChild(row);
+            });
+          })
+          .catch(function () {
+            mount.innerHTML = '<p class="muted">Notes are unavailable right now.</p>';
+          });
+      })();
+    </script>
   </body>
 </html>
