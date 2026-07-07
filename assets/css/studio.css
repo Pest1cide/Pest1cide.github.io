@@ -24,7 +24,8 @@
   --bg-raise: #121216;
   --ink: #f2f0ea;
   --ink-dim: rgba(242, 240, 234, 0.64);
-  --ink-faint: rgba(242, 240, 234, 0.4);
+  --ink-soft: rgba(242, 240, 234, 0.54); /* smallest readable text (AA on --bg) */
+  --ink-faint: rgba(242, 240, 234, 0.4); /* decorative only */
   --hair: rgba(242, 240, 234, 0.14);
   --hair-soft: rgba(242, 240, 234, 0.07);
   --panel: rgba(255, 255, 255, 0.04);
@@ -88,6 +89,8 @@ h1, h2, h3, h4 {
 .skip-link:focus { top: 1rem; }
 
 /* ---- Loader ----------------------------------------------------------- */
+/* the loader is JS-driven; never show it when JS is unavailable */
+html:not(.js) .loader { display: none; }
 .loader {
   position: fixed;
   inset: 0;
@@ -569,7 +572,7 @@ body.nav-open { overflow: hidden; }
 .research-entry__supervisors {
   margin-top: 1.2rem;
   font-size: 0.82rem;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
 }
 .research-entry__supervisors a {
   color: var(--ink-dim);
@@ -662,7 +665,7 @@ body.nav-open { overflow: hidden; }
   font-size: 0.74rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
 }
 .project-card h3 { font-size: 1.3rem; }
 .project-card p { font-size: 0.94rem; color: var(--ink-dim); flex: 1; }
@@ -737,7 +740,7 @@ body.nav-open { overflow: hidden; }
 .note-row time {
   font-family: var(--font-display);
   font-size: 0.8rem;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -745,7 +748,7 @@ body.nav-open { overflow: hidden; }
 .note-row p { font-size: 0.88rem; color: var(--ink-dim); margin-top: 0.2rem; }
 .note-row__arrow { color: var(--ink-faint); transition: color 0.25s, transform 0.3s var(--ease-out); }
 .note-row:hover .note-row__arrow { color: var(--accent-bright); transform: translateX(4px); }
-.muted { color: var(--ink-faint); }
+.muted { color: var(--ink-soft); }
 
 /* ---- Contact ---------------------------------------------------------------- */
 .contact {
@@ -781,7 +784,7 @@ body.nav-open { overflow: hidden; }
   border-top: 1px solid var(--hair-soft);
   padding: 2rem 0 2.4rem;
   font-size: 0.85rem;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
 }
 .site-footer .shell {
   display: flex;
@@ -840,15 +843,26 @@ body.nav-open { overflow: hidden; }
 .prose img { border-radius: 12px; border: 1px solid var(--hair-soft); }
 
 /* ---- Reveal animations ------------------------------------------------------- */
-[data-reveal] {
+/* hidden state only applies once studio.js has stamped html.js,
+   so content stays visible when JavaScript is unavailable */
+html.js [data-reveal] {
   opacity: 0;
   transform: translateY(26px);
   transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
   transition-delay: calc(var(--reveal-order, 0) * 90ms);
 }
-[data-reveal].is-revealed {
+html.js [data-reveal].is-revealed {
   opacity: 1;
   transform: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 /* test hook: ?flat collapses viewport-height sections for full-page capture */

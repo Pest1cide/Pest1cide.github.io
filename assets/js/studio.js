@@ -3,6 +3,9 @@
 (function () {
   'use strict';
 
+  // signal that JS is running so CSS can safely hide-then-reveal content
+  document.documentElement.classList.add('js');
+
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
     /(^|[?&])nomotion/.test(location.search);
   if (/(^|[?&])flat/.test(location.search)) document.documentElement.classList.add('flat');
@@ -56,7 +59,8 @@
     var particles = [];
     var obstacles = [];
     var running = true;
-    var visible = true;
+    var inView = true;
+    var tabVisible = !document.hidden;
 
     function resize() {
       W = host.clientWidth;
@@ -89,7 +93,7 @@
 
     function step(now) {
       if (!running) return;
-      if (!visible) { requestAnimationFrame(step); return; }
+      if (!(inView && tabVisible)) { requestAnimationFrame(step); return; }
 
       ctx.fillStyle = 'rgba(11, 11, 13, 0.14)';
       ctx.fillRect(0, 0, W, H);
@@ -180,11 +184,11 @@
     }
 
     var io = new IntersectionObserver(function (entries) {
-      visible = entries[0].isIntersecting;
+      inView = entries[0].isIntersecting;
     }, { threshold: 0 });
     io.observe(host);
     document.addEventListener('visibilitychange', function () {
-      visible = !document.hidden && visible;
+      tabVisible = !document.hidden;
     });
 
     var resizeTimer;
@@ -263,6 +267,11 @@
   function initVideos() {
     var vids = document.querySelectorAll('video[data-autoplay]');
     if (!vids.length) return;
+    if (reduceMotion) {
+      // no autoplaying motion: show a still frame with opt-in controls
+      vids.forEach(function (v) { v.controls = true; });
+      return;
+    }
     if (!('IntersectionObserver' in window)) {
       vids.forEach(function (v) { v.play().catch(function () {}); });
       return;
@@ -292,9 +301,12 @@
           a.className = 'note-row';
           a.href = 'post.html?post=' + encodeURIComponent(post.slug);
           a.innerHTML =
-            '<time datetime="' + post.date + '">' + post.date + '</time>' +
+            '<time></time>' +
             '<div><h3></h3><p></p></div>' +
             '<span class="note-row__arrow" aria-hidden="true">→</span>';
+          var time = a.querySelector('time');
+          time.setAttribute('datetime', post.date);
+          time.textContent = post.date;
           a.querySelector('h3').textContent = post.title;
           a.querySelector('p').textContent = post.excerpt;
           mount.appendChild(a);

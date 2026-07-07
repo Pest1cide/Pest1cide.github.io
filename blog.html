@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Field notes by Zimeng Wang on robotics research, control, learning, and building embodied systems.">
     <meta name="theme-color" content="#0b0b0d">
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
     <title>Notes | Zimeng Wang</title>
     <link rel="stylesheet" href="assets/css/studio.css">
     <script defer src="assets/js/studio.js"></script>
     <style>
       /* Page-specific: chips inside note rows + slightly larger titles on the index */
       .notes-index .note-row { padding-block: 1.9rem; }
-      .notes-index .note-row h3 { font-size: 1.35rem; }
+      .notes-index .note-row h2 { font-size: 1.35rem; font-weight: 500; }
       .note-chips {
         display: flex;
         flex-wrap: wrap;
@@ -122,7 +123,7 @@
               time.textContent = formatDate(post.date);
 
               var body = document.createElement('div');
-              var title = document.createElement('h3');
+              var title = document.createElement('h2');
               title.textContent = post.title || '';
               var excerpt = document.createElement('p');
               excerpt.textContent = post.excerpt || '';
