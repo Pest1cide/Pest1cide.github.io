@@ -47,9 +47,21 @@
 
   /* ---- Distance-field flow hero ----------------------------------------
      Particles follow a nominal flow that is modulated around moving
-     obstacles — a small homage to dynamical-systems obstacle avoidance. */
+     obstacles — a small homage to dynamical-systems obstacle avoidance.
+     The cursor is a live obstacle: the flow bends around it and glows
+     nearby, clicks send out a ripple. Runs on the homepage hero and, by
+     injecting a canvas, on every subpage's .page-hero. */
   function initFlowField() {
     var host = document.querySelector('.hero__canvas');
+    if (!host) {
+      var pageHero = document.querySelector('.page-hero');
+      if (pageHero) {
+        host = document.createElement('div');
+        host.className = 'hero__canvas';
+        host.setAttribute('aria-hidden', 'true');
+        pageHero.insertBefore(host, pageHero.firstChild);
+      }
+    }
     if (!host) return;
     var canvas = document.createElement('canvas');
     host.appendChild(canvas);
@@ -61,6 +73,8 @@
     var running = true;
     var inView = true;
     var tabVisible = !document.hidden;
+    var pointer = { x: 0, y: 0, active: false, r: 90 };
+    var ripples = [];
 
     function resize() {
       W = host.clientWidth;
@@ -68,6 +82,7 @@
       canvas.width = W * dpr;
       canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      pointer.r = Math.min(Math.min(W, H) * 0.16, 120);
       seed();
     }
 
@@ -118,6 +133,27 @@
         }
       }
 
+      // cursor field: contour rings that track the pointer
+      if (pointer.active) {
+        for (var pk = 0; pk < 3; pk++) {
+          ctx.strokeStyle = 'rgba(232, 111, 67, ' + (0.18 - pk * 0.05) + ')';
+          ctx.beginPath();
+          ctx.arc(pointer.x, pointer.y, pointer.r * 0.5 + pk * 20, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
+
+      // click ripples
+      for (i = ripples.length - 1; i >= 0; i--) {
+        var age = now - ripples[i].t;
+        if (age > 900 || age < 0) { ripples.splice(i, 1); continue; }
+        var prog = age / 900;
+        ctx.strokeStyle = 'rgba(232, 111, 67, ' + (0.45 * (1 - prog)) + ')';
+        ctx.beginPath();
+        ctx.arc(ripples[i].x, ripples[i].y, prog * Math.min(W, H) * 0.55, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
       var speedBase = 0.55;
       for (i = 0; i < particles.length; i++) {
         var p = particles[i];
@@ -140,6 +176,22 @@
             fx += (nx * 0.9 + tx * 0.8) * w * w;
             fy += (ny * 0.9 + ty * 0.8) * w * w;
             glow = Math.max(glow, w);
+          }
+        }
+
+        // the cursor is a live obstacle the flow steers around
+        if (pointer.active) {
+          var mdx = p.x - pointer.x, mdy = p.y - pointer.y;
+          var md = Math.sqrt(mdx * mdx + mdy * mdy) || 1;
+          var mgamma = md / pointer.r;
+          if (mgamma < 3) {
+            var mw = Math.max(0, (3 - mgamma) / 2);
+            var mnx = mdx / md, mny = mdy / md;
+            var mtx = -mny, mty = mnx;
+            if (mtx * fx + mty * fy < 0) { mtx = mny; mty = -mnx; }
+            fx += (mnx * 1.15 + mtx * 0.95) * mw * mw;
+            fy += (mny * 1.15 + mty * 0.95) * mw * mw;
+            glow = Math.max(glow, mw);
           }
         }
 
@@ -190,6 +242,26 @@
     document.addEventListener('visibilitychange', function () {
       tabVisible = !document.hidden;
     });
+
+    function updatePointer(e) {
+      var rect = host.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      if (x >= -40 && x <= W + 40 && y >= -40 && y <= H + 40) {
+        pointer.x = x; pointer.y = y; pointer.active = true;
+      } else {
+        pointer.active = false;
+      }
+    }
+    window.addEventListener('pointermove', updatePointer, { passive: true });
+    window.addEventListener('pointerdown', function (e) {
+      updatePointer(e);
+      if (pointer.active) ripples.push({ x: pointer.x, y: pointer.y, t: performance.now() });
+    }, { passive: true });
+    window.addEventListener('pointerup', function (e) {
+      if (e.pointerType === 'touch') pointer.active = false;
+    }, { passive: true });
+    window.addEventListener('blur', function () { pointer.active = false; });
 
     var resizeTimer;
     window.addEventListener('resize', function () {
