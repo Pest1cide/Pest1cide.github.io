@@ -86,7 +86,7 @@
     }
 
     function seed() {
-      var n = Math.min(Math.round((W * H) / 7000), 420);
+      var n = Math.min(Math.round((W * H) / 5200), 460);
       particles = [];
       for (var i = 0; i < n; i++) particles.push(spawn(true));
       obstacles = [
@@ -125,7 +125,7 @@
         o = obstacles[i];
         for (var k = 0; k < 3; k++) {
           var rr = o.r + k * 26;
-          ctx.strokeStyle = 'rgba(242, 240, 234, ' + (0.05 - k * 0.014) + ')';
+          ctx.strokeStyle = 'rgba(242, 240, 234, ' + (0.08 - k * 0.02) + ')';
           ctx.beginPath();
           ctx.arc(o.x, o.y, rr, 0, Math.PI * 2);
           ctx.stroke();
@@ -187,7 +187,7 @@
 
         ctx.strokeStyle = glow > 0.25
           ? 'rgba(232, 111, 67, ' + Math.min(0.10 + glow * 0.5, 0.75) + ')'
-          : 'rgba(242, 240, 234, 0.20)';
+          : 'rgba(242, 240, 234, 0.30)';
         ctx.beginPath();
         ctx.moveTo(px, py);
         ctx.lineTo(p.x, p.y);
@@ -246,6 +246,26 @@
     });
 
     resize();
+
+    // Self-heal the canvas size: the injected subpage host can be measured
+    // before layout/fonts settle, which would leave a 0-sized canvas that
+    // never draws. A ResizeObserver re-sizes whenever the host's box changes,
+    // and a load-time re-measure covers browsers without ResizeObserver.
+    if ('ResizeObserver' in window) {
+      var lastW = W, lastH = H;
+      var ro = new ResizeObserver(function () {
+        if (host.clientWidth !== lastW || host.clientHeight !== lastH) {
+          lastW = host.clientWidth;
+          lastH = host.clientHeight;
+          resize();
+        }
+      });
+      ro.observe(host);
+    }
+    window.addEventListener('load', function () {
+      if (host.clientWidth !== W || host.clientHeight !== H || W === 0 || H === 0) resize();
+    });
+
     requestAnimationFrame(step);
   }
 
