@@ -48,9 +48,9 @@
   /* ---- Distance-field flow hero ----------------------------------------
      Particles follow a nominal flow that is modulated around moving
      obstacles — a small homage to dynamical-systems obstacle avoidance.
-     The cursor is a live obstacle: the flow bends around it and glows
-     nearby, clicks send out a ripple. Runs on the homepage hero and, by
-     injecting a canvas, on every subpage's .page-hero. */
+     The cursor is a live obstacle: the flow bends around it and the
+     nearby streams glow. Runs on the homepage hero and, by injecting a
+     canvas, on every subpage's .page-hero. */
   function initFlowField() {
     var host = document.querySelector('.hero__canvas');
     if (!host) {
@@ -74,7 +74,6 @@
     var inView = true;
     var tabVisible = !document.hidden;
     var pointer = { x: 0, y: 0, active: false, r: 90 };
-    var ripples = [];
 
     function resize() {
       W = host.clientWidth;
@@ -131,27 +130,6 @@
           ctx.arc(o.x, o.y, rr, 0, Math.PI * 2);
           ctx.stroke();
         }
-      }
-
-      // cursor field: contour rings that track the pointer
-      if (pointer.active) {
-        for (var pk = 0; pk < 3; pk++) {
-          ctx.strokeStyle = 'rgba(232, 111, 67, ' + (0.18 - pk * 0.05) + ')';
-          ctx.beginPath();
-          ctx.arc(pointer.x, pointer.y, pointer.r * 0.5 + pk * 20, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-      }
-
-      // click ripples
-      for (i = ripples.length - 1; i >= 0; i--) {
-        var age = now - ripples[i].t;
-        if (age > 900 || age < 0) { ripples.splice(i, 1); continue; }
-        var prog = age / 900;
-        ctx.strokeStyle = 'rgba(232, 111, 67, ' + (0.45 * (1 - prog)) + ')';
-        ctx.beginPath();
-        ctx.arc(ripples[i].x, ripples[i].y, prog * Math.min(W, H) * 0.55, 0, Math.PI * 2);
-        ctx.stroke();
       }
 
       var speedBase = 0.55;
@@ -254,10 +232,8 @@
       }
     }
     window.addEventListener('pointermove', updatePointer, { passive: true });
-    window.addEventListener('pointerdown', function (e) {
-      updatePointer(e);
-      if (pointer.active) ripples.push({ x: pointer.x, y: pointer.y, t: performance.now() });
-    }, { passive: true });
+    // touch: follow the finger while dragging, release cleanly on lift
+    window.addEventListener('pointerdown', updatePointer, { passive: true });
     window.addEventListener('pointerup', function (e) {
       if (e.pointerType === 'touch') pointer.active = false;
     }, { passive: true });

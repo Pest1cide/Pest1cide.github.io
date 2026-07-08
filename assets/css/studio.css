@@ -804,13 +804,15 @@ body.nav-open { overflow: hidden; }
   padding-bottom: clamp(3rem, 8vh, 5rem);
   min-height: min(64vh, 600px);
 }
-/* fade the interactive flow field into the page background, keep text legible */
+/* fade the interactive flow field into the page background, keep text legible.
+   Kept light so the animation reads clearly on subpages; the title is large
+   and bold enough to stay legible over it. */
 .page-hero::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(to top, var(--bg) 3%, rgba(11, 11, 13, 0.28) 46%, rgba(11, 11, 13, 0.55) 100%);
+  background: linear-gradient(to top, var(--bg) 2%, rgba(11, 11, 13, 0.16) 48%, rgba(11, 11, 13, 0.32) 100%);
   pointer-events: none;
 }
 .page-hero > .shell { position: relative; z-index: 2; }
